@@ -4,12 +4,12 @@
 
 // Demonstrate some basic assertions.
 TEST(TupleTest, TupleIsPoint) {
-  Tuple t(4.3, -4.2, 3.1, 1.0);
+  Tuple t(4.3f, -4.2f, 3.1f, 1.0f);
    EXPECT_EQ(t.IsPoint(), true);
 }
 
 TEST(TupleTest, TupleIsVector) {
-  Tuple t(4.3, -4.2, 3.1, 0.0);
+  Tuple t(4.3f, -4.2f, 3.1f, 0.0f);
    EXPECT_EQ(t.IsVector(), true);
 }
 
@@ -63,48 +63,48 @@ TEST(TupleTest, negatingATuple) {
 
 TEST(TupleTest, multiplyByScalar) {
     Tuple t = Tuple(1, -2, 3, -4);
-    EXPECT_TRUE ( t * 3.5  == Tuple(3.5, -7, 10.5, -14));
-    EXPECT_TRUE ( t * 0.5  == Tuple(0.5, -1, 1.5, -2));
+    EXPECT_TRUE ( t * 3.5f  == Tuple(3.5f, -7.0f, 10.5f, -14.0f));
+    EXPECT_TRUE ( t * 0.5f  == Tuple(0.5f, -1.0f, 1.5f, -2.0f));
 }
 
 TEST(TupleTest, divideByScalar) {
-    Tuple t = Tuple(1, -2, 3, -4);
-    EXPECT_TRUE ( t / 2  == Tuple(0.5, -1, 1.5, -2));
+    Tuple t = Tuple(1.0f, -2.0f, 3.0f, -4.0f);
+    EXPECT_TRUE ( t / 2  == Tuple(0.5f, -1.0f, 1.5f, -2.0f));
 }
 
 TEST(TupleTest, magnitude) {
-    Tuple t1= Tuple::Vector(1, 0, 0);
-    Tuple t2= Tuple::Vector(0, 1, 0);
-    Tuple t3= Tuple::Vector(0, 0, 1);
-    Tuple t4= Tuple::Vector(1, 2, 3);
-    Tuple t5= Tuple::Vector(-1, -2, -3);
+    Tuple t1= Tuple::Vector(1.0f, 0.0f, 0.0f);
+    Tuple t2= Tuple::Vector(0.0f, 1.0f, 0.0f);
+    Tuple t3= Tuple::Vector(0.f, 0.0f, 1.0f);
+    Tuple t4= Tuple::Vector(1.0f, 2.0f, 3.0f);
+    Tuple t5= Tuple::Vector(-1.0f, -2.0f, -3.0f);
 
-    EXPECT_DOUBLE_EQ(t1.Magnitude(), 1.0);
-    EXPECT_DOUBLE_EQ(t2.Magnitude(), 1.0);
-    EXPECT_DOUBLE_EQ(t3.Magnitude(), 1.0);
-    EXPECT_DOUBLE_EQ(t4.Magnitude(), std::sqrt(14.0));
-    EXPECT_DOUBLE_EQ(t5.Magnitude(), std::sqrt(14.0));
+    EXPECT_FLOAT_EQ(t1.Magnitude(), 1.0f);
+    EXPECT_FLOAT_EQ(t2.Magnitude(), 1.0f);
+    EXPECT_FLOAT_EQ(t3.Magnitude(), 1.0f);
+    EXPECT_FLOAT_EQ(t4.Magnitude(), std::sqrt(14.0f));
+    EXPECT_FLOAT_EQ(t5.Magnitude(), std::sqrt(14.0f));
 }
 
 TEST(TupleTest, normalize) {
-    Tuple t1 = Tuple::Vector(4, 0 ,0);
-    EXPECT_TRUE (t1.normalize() == Tuple::Vector(1, 0, 0));
-    Tuple t2 = Tuple::Vector(1, 2, 3);
+    Tuple t1 = Tuple::Vector(4.0f, 0.0f ,0.0f);
+    EXPECT_TRUE (t1.normalize() == Tuple::Vector(1.0f, 0.0f, 0.0f));
+    Tuple t2 = Tuple::Vector(1.0f, 2.0f, 3.0f);
     Tuple t2n = t2.normalize();
-    EXPECT_TRUE(t2n == Tuple::Vector(0.26726, 0.53452, 0.80178));
-    EXPECT_DOUBLE_EQ(t2n.Magnitude(), 1.0);
+    EXPECT_TRUE(t2n == Tuple::Vector(0.26726f, 0.53452f, 0.80178f));
+    EXPECT_FLOAT_EQ(t2n.Magnitude(), 1.0f);
 
 }
 
 TEST(TupleTest, dot) {
-    Tuple t1 = Tuple::Vector(1, 2, 3);
-    Tuple t2 = Tuple::Vector(2, 3, 4);
-    EXPECT_DOUBLE_EQ(t1.Dot(t2), 20);
+    Tuple t1 = Tuple::Vector(1.0f, 2.0f, 3.0f);
+    Tuple t2 = Tuple::Vector(2.0f, 3.0f, 4.0f);
+    EXPECT_FLOAT_EQ(t1.Dot(t2), 20.0f);
 }
 
 TEST(TupleTest, cross) {
-    Tuple t1 = Tuple::Vector(1, 2, 3);
-    Tuple t2 = Tuple::Vector(2, 3, 4);
-    EXPECT_TRUE (t1.Cross(t2) == Tuple::Vector(-1, 2, -1));
-    EXPECT_TRUE (t2.Cross(t1) == Tuple::Vector(1, -2, 1));
+    Tuple t1 = Tuple::Vector(1.0f, 2.0f, 3.0f);
+    Tuple t2 = Tuple::Vector(2.0f, 3.0f, 4.0f);
+    EXPECT_TRUE (t1.Cross(t2) == Tuple::Vector(-1.0f, 2.0f, -1.0f));
+    EXPECT_TRUE (t2.Cross(t1) == Tuple::Vector(1.0f, -2.0f, 1.0f));
 }

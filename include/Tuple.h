@@ -6,19 +6,19 @@
 class Tuple
 {
 private:
-    double m_x;
-    double m_y;
-    double m_z;
-    double m_w;
+    float m_x;
+    float m_y;
+    float m_z;
+    float m_w;
 public:
-    Tuple(double x, double y, double z, double w);
+    Tuple(float x, float y, float z, float w);
     Tuple(const Tuple& t);
     Tuple();
 
-    double X() const;
-    double Y() const;
-    double Z() const;
-    double W() const;
+    float X() const;
+    float Y() const;
+    float Z() const;
+    float W() const;
 
 
     bool IsPoint() const;
@@ -27,20 +27,20 @@ public:
     Tuple operator+(const Tuple& t) const;
     Tuple operator-(const Tuple& t) const;
     bool operator==(const Tuple& t) const;
-    Tuple operator*(double scalar) const;
-    Tuple operator/(double scalar) const;
+    Tuple operator*(float scalar) const;
+    Tuple operator/(float scalar) const;
 
     Tuple operator-() const;
 
-    double Dot(const Tuple& t) const;
+    float Dot(const Tuple& t) const;
     Tuple Cross(const Tuple& t) const;
-    double Magnitude() const;
+    float Magnitude() const;
     Tuple normalize() const;
     
     virtual ~Tuple();
 
-    static Tuple Point(double x, double y, double z);
-    static Tuple Vector(double x, double y, double z);
+    static Tuple Point(float x, float y, float z);
+    static Tuple Vector(float x, float y, float z);
 
     friend std::ostream& operator<<(std::ostream& os, const Tuple& t);
 };

@@ -1,7 +1,7 @@
 #include "Color.h"
 
 Color::Color() {}
-Color::Color(double r, double g, double b): Tuple(r,g,b,0.0){
+Color::Color(float r, float g, float b): Tuple(r,g,b,0.0){
 }
 
 Color::Color(const Color& color): Tuple(color.R(), color.G(), color.B(), 0.0){ 
@@ -9,13 +9,13 @@ Color::Color(const Color& color): Tuple(color.R(), color.G(), color.B(), 0.0){
 
 
 
-double Color::R() const {
+float Color::R() const {
     return X();
 }
-double Color::G() const {
+float Color::G() const {
     return Y();
 }
-double Color::B() const {
+float Color::B() const {
     return Z();
 }
 

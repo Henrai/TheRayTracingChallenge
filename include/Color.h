@@ -7,12 +7,12 @@ class Color : public Tuple
 
 public:
     Color();
-    Color(double r, double g, double b);
+    Color(float r, float g, float b);
     Color(const Color& color);
 
-    double R() const;
-    double G() const; 
-    double B() const;
+    float R() const;
+    float G() const; 
+    float B() const;
 
     Color HadamardProduct(const Color& c) const;
 

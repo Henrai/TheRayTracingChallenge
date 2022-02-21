@@ -3,7 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-Tuple::Tuple(double x, double y, double z, double w)
+Tuple::Tuple(float x, float y, float z, float w)
 {
     m_x = x;
     m_y = y;
@@ -20,16 +20,16 @@ Tuple::Tuple(const Tuple& t) {
 
 Tuple::Tuple() {}
 
-double Tuple::X() const {
+float Tuple::X() const {
     return m_x;
 }
-double Tuple::Y() const {
+float Tuple::Y() const {
     return m_y;
 }
-double Tuple::Z() const {
+float Tuple::Z() const {
     return m_z;
 }
-double Tuple::W() const {
+float Tuple::W() const {
     return m_w;
 }
 
@@ -63,23 +63,23 @@ Tuple Tuple::operator-() const {
     return Tuple(-m_x, -m_y, -m_z, -m_w);
 }
 
-Tuple Tuple::Point(double x, double y, double z) {
+Tuple Tuple::Point(float x, float y, float z) {
     return {x, y, z, 1.0};
 }
 
-Tuple Tuple::Vector(double x, double y, double z) {
+Tuple Tuple::Vector(float x, float y, float z) {
     return {x, y, z, 0.0};
 }
 
-Tuple Tuple::operator*(double scalar) const {
+Tuple Tuple::operator*(float scalar) const {
     return {m_x * scalar, m_y * scalar , m_z * scalar, m_w * scalar};
 }
 
-Tuple Tuple::operator/(double scalar) const {
+Tuple Tuple::operator/(float scalar) const {
      return {m_x / scalar, m_y / scalar , m_z / scalar, m_w / scalar};
 }
 
-double Tuple::Dot(const Tuple& t) const {
+float Tuple::Dot(const Tuple& t) const {
     return m_x * t.X() + m_y * t.Y() + m_z * t.Z();
 }
 
@@ -91,7 +91,7 @@ Tuple Tuple::Cross(const Tuple& t) const {
     );
 }
 
-double Tuple::Magnitude() const {
+float Tuple::Magnitude() const {
     return std::sqrt(this->Dot(*this));
 }
 
@@ -109,3 +109,4 @@ std::ostream& operator<<(std::ostream& os, const Tuple& t)
     os << t.X() << ", " << t.Y() << ", " << t.Z() <<")";
     return os;
 }
+
