@@ -10,12 +10,16 @@ public:
     Color(double r, double g, double b);
     Color(const Color& color);
 
-    double Red() const;
-    double Green() const; 
-    double Blue() const;
+    double R() const;
+    double G() const; 
+    double B() const;
 
     Color HadamardProduct(const Color& c) const;
 
-
+    static const Color RED;
+    static const Color GREEN;
+    static const Color BLUE;
+    static const Color BLACK;
+    static const Color WHITE;
 };
 #endif

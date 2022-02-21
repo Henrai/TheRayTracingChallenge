@@ -3,9 +3,9 @@
 
 TEST(ColorTest, initilize) {
     Color c(-0.5, 0.4, 1.7);
-    EXPECT_DOUBLE_EQ(c.Red(), -0.5);
-    EXPECT_DOUBLE_EQ(c.Green(), 0.4);
-    EXPECT_DOUBLE_EQ(c.Blue(), 1.7);
+    EXPECT_DOUBLE_EQ(c.R(), -0.5);
+    EXPECT_DOUBLE_EQ(c.G(), 0.4);
+    EXPECT_DOUBLE_EQ(c.B(), 1.7);
 }
 
 TEST(ColorTest, Operator) {

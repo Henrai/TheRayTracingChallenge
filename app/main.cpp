@@ -1,6 +1,8 @@
 #include <iostream>
 #include <Tuple.h>
 #include <MathUtil.h>
+#include <Canvas.h>
+#include <fstream>
 
 using namespace std;
 
@@ -30,15 +32,22 @@ Projectile tick(const Enviroment& env, const Projectile& proj) {
 }
 
 int main() {
-    Projectile p = Projectile(Tuple::Point(0,1,0), Tuple::Vector(1,1,0).normalize());
+    Canvas c(900, 550);
+    Projectile p = Projectile(Tuple::Point(0,1,0), Tuple::Vector(1,1.8,0).normalize() * 11.25);
     Enviroment e = Enviroment(Tuple::Vector(0, -0.1, 0), Tuple::Vector(-0.01, 0,0)); 
     int tick_num = 0;
+    
     while (p.position.Y() > 0.0)
-    {
+    {   
+        c[(int)p.position.X()][550 - 1 - (int) p.position.Y()] = Color::RED;
         p = tick(e, p);
         cout << tick_num <<": " << p.position << " " << p.velocity << endl;
         tick_num++;
     }
     
+    ofstream out("projectile.ppm");
+    out<<c;
+    out.close();
+
     return 0;
 }
