@@ -3,6 +3,8 @@
 #include <cmath>
 #include <iostream>
 
+using namespace math;
+
 Tuple::Tuple(float x, float y, float z, float w)
 {
     m_x = x;
@@ -78,6 +80,31 @@ Tuple Tuple::operator*(float scalar) const {
 Tuple Tuple::operator/(float scalar) const {
      return {m_x / scalar, m_y / scalar , m_z / scalar, m_w / scalar};
 }
+
+float& Tuple::operator[](size_t index) {
+    if (index == 0) {
+        return m_x;
+    } else if (index == 1) {
+        return m_y;
+    } else if (index == 2) {
+        return m_z;
+    } else {
+        return m_w;
+    }
+}
+
+const float Tuple::operator[](size_t index) const {
+    if (index == 0) {
+        return m_x;
+    } else if (index == 1) {
+        return m_y;
+    } else if (index == 2) {
+        return m_z;
+    } else {
+        return m_w;
+    }
+}
+
 
 float Tuple::Dot(const Tuple& t) const {
     return m_x * t.X() + m_y * t.Y() + m_z * t.Z();

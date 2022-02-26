@@ -3,7 +3,7 @@
 #include <MathUtil.h>
 #include <Canvas.h>
 #include <fstream>
-
+#include <vector>
 using namespace std;
 
 struct Projectile{

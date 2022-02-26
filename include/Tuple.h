@@ -2,7 +2,6 @@
 #define __TUPLE_H__
 
 #include <ostream>
-
 class Tuple
 {
 private:
@@ -20,7 +19,6 @@ public:
     float Z() const;
     float W() const;
 
-
     bool IsPoint() const;
     bool IsVector() const;
     
@@ -31,6 +29,9 @@ public:
     Tuple operator/(float scalar) const;
 
     Tuple operator-() const;
+
+    float& operator[](size_t index);
+    const float operator[](size_t index) const;
 
     float Dot(const Tuple& t) const;
     Tuple Cross(const Tuple& t) const;
