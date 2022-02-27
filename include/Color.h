@@ -1,5 +1,5 @@
-#ifndef __COLOR_H__
-#define __COLOR_H__
+#pragma once
+
 #include "Tuple.h"
 
 class Color : public Tuple
@@ -22,4 +22,3 @@ public:
     static const Color BLACK;
     static const Color WHITE;
 };
-#endif

@@ -1,5 +1,4 @@
-#ifndef __CANVAS_H__
-#define __CANVAS_H__
+#pragma once
 
 #include "Color.h"
 #include <vector>
@@ -27,4 +26,3 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Canvas& canvas);
 };
-#endif

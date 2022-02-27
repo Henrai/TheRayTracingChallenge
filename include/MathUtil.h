@@ -1,5 +1,4 @@
-#ifndef __MATHUTIL_H__
-#define __MATHUTIL_H__
+#pragma once
 
 #include <cmath>
 
@@ -9,5 +8,3 @@ inline bool equal(float d1, float d2) {
     return  std::abs(d1 - d2) < EPSILON;
 }
 }
-
-#endif

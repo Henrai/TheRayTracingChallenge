@@ -1,8 +1,8 @@
 #include <Matrix.h>
 #include <Tuple.h>
-#include <gtest/gtest.h>
 #include <iostream>
 
+#include <gtest/gtest.h>
 using namespace std;
 
 TEST (MatrixTest, createMatrix) {

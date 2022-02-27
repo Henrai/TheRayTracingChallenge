@@ -1,5 +1,4 @@
-#ifndef __TUPLE_H__
-#define __TUPLE_H__
+#pragma once
 
 #include <ostream>
 class Tuple
@@ -45,7 +44,3 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Tuple& t);
 };
-
-
-
-#endif

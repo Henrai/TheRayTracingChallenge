@@ -7,6 +7,7 @@ add_library(${LIBRARY}
     Tuple.cpp 
     Color.cpp
     Canvas.cpp
+    Transformation.cpp
     ${HEADER_LIST})
 
 target_include_directories(${LIBRARY} PUBLIC ../include)

@@ -1,5 +1,4 @@
-#ifndef __MATRIX_H__
-#define __MATRIX_H__
+#pragma once
 
 #include <initializer_list>
 #include <stdint.h>
@@ -46,6 +45,14 @@ bool operator!=(const Matrix<DIM>& matrix) const {
     return !(*this == matrix);
 }
 
+Matrix operator=(const Matrix& matrix) {
+    for(size_t i = 0; i < DIM; i++) {
+        for (size_t j = 0; j < DIM; j++) {
+            m_data[i][j] = matrix[i][j];
+        }
+    }
+    return *this;
+}
 
 bool IsInvertible() const {
     return !equal(this->Determinant(),0.0f);
@@ -141,12 +148,12 @@ std::ostream& operator<<(std::ostream& os, const Matrix<DIM> & m) {
 }
 
 template<>
-float Matrix2::Determinant () const{
+inline float Matrix2::Determinant () const{
     return m_data[0][0] * m_data[1][1] - m_data[0][1] * m_data[1][0];
 }
 
 template<>
-Matrix4 Matrix4::operator*(Matrix4 const& other) const {
+inline Matrix4 Matrix4::operator*(Matrix4 const& other) const {
     Matrix4 ans;
     for (size_t i = 0; i < 4; i++)
     {
@@ -163,7 +170,7 @@ Matrix4 Matrix4::operator*(Matrix4 const& other) const {
 }
 
 template<uint8_t DIM>
-float Matrix<DIM>::Determinant () const {
+inline float Matrix<DIM>::Determinant () const {
     float det = 0.f;
     for (int j = 0; j < DIM; j++)
     {
@@ -201,7 +208,7 @@ Matrix<DIM> Matrix<DIM>::Inverse() const {
 }
 
 template<>
-Matrix2 Matrix2::Identity(){
+inline Matrix2 Matrix2::Identity(){
     return Matrix({
         {1,0},
         {0,1}
@@ -209,7 +216,7 @@ Matrix2 Matrix2::Identity(){
 }
 
 template<>
-Matrix3 Matrix3::Identity(){
+inline Matrix3 Matrix3::Identity(){
     return Matrix({
         {1,0,0},
         {0,1,0},
@@ -218,7 +225,7 @@ Matrix3 Matrix3::Identity(){
 }
 
 template<>
-Matrix4 Matrix4::Identity(){
+inline Matrix4 Matrix4::Identity(){
     return Matrix({
         {1,0,0,0},
         {0,1,0,0},
@@ -226,4 +233,3 @@ Matrix4 Matrix4::Identity(){
         {0,0,0,1}
     });
 }
-#endif
