@@ -199,6 +199,9 @@ template<uint8_t DIM>
 Matrix<DIM> Matrix<DIM>::Inverse() const {
     Matrix<DIM> mat;
     float det = this->Determinant();
+    if (det == 0) {
+        return Matrix<DIM>::Identity();
+    }
     for(size_t i = 0; i < DIM; i++) {
         for(size_t j = 0; j < DIM; j++) {
             mat[j][i] = this->Cofactor(i,j)/det;

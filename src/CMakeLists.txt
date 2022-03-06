@@ -8,6 +8,10 @@ add_library(${LIBRARY}
     Color.cpp
     Canvas.cpp
     Transformation.cpp
+    Ray.cpp
+    Shape.cpp
+    Sphere.cpp
+    Intersection.cpp
     ${HEADER_LIST})
 
 target_include_directories(${LIBRARY} PUBLIC ../include)
