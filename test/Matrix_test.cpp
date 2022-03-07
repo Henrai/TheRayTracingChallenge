@@ -210,3 +210,23 @@ TEST(MatrixTest, inverseToIdentity)
 
     EXPECT_TRUE( a * a.Inverse() == Matrix4::Identity());
 }
+
+TEST(MatrixTest, Transpose) {
+        Matrix4 a = {
+                {0.f, 9.f, 3.f, 0.f},
+                {9.f, 8.f, 0.f, 8.f},
+                {1.f, 8.f, 5.f, 3.f},
+                {0.f, 0.f, 5.f, 8.f}
+        };
+
+        Matrix4 b = {
+                {0.f, 9.f, 1.f, 0.f},
+                {9.f, 8.f, 8.f, 0.f},
+                {3.f, 0.f, 5.f, 5.f},
+                {0.f, 8.f, 3.f, 8.f}
+        };
+
+        cout<<a.Transpose()<<endl<<b;
+
+        EXPECT_TRUE(a.Transpose() == b);
+}

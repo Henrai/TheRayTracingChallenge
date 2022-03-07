@@ -64,7 +64,7 @@ float Determinant() const;
 Matrix<DIM> Inverse() const;
 Matrix<DIM - 1> Submatrix(uint8_t row, uint8_t col) const;
 Matrix operator*(Matrix const& other) const; 
-
+Matrix Transpose() const;
 
 
 template<uint8_t D = DIM>
@@ -179,6 +179,19 @@ inline float Matrix<DIM>::Determinant () const {
     return det;
 }
 
+template<uint8_t DIM>
+Matrix<DIM> Matrix<DIM>::Transpose() const {
+
+    Matrix<DIM> m;
+
+    for (size_t i = 0; i < DIM; i++) {
+        for (size_t j = i; j < DIM; j++) {
+            m[i][j] = m_data[j][i];
+            m[j][i] = m_data[i][j];
+        }
+    }
+    return m;
+}
 
 template<uint8_t DIM>
 Matrix<DIM - 1> Matrix<DIM>::Submatrix(uint8_t row, uint8_t col) const  {
