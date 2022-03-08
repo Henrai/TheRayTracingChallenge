@@ -1,5 +1,6 @@
 #include <Sphere.h>
 #include <Intersection.h>
+#include <Tuple.h>
 
 #include <cmath>
 #include <vector>
@@ -20,4 +21,12 @@ void Sphere::Intersect(const Ray& ray, std::vector<Intersection>& Intersect) con
     
     Intersect.push_back(Intersection(shared_from_this(), (-1*b - sqrtf(delta))/(2*a)));
     Intersect.push_back(Intersection(shared_from_this(),  (-1*b + sqrtf(delta))/(2*a)));
+}
+
+Tuple  Sphere::NormalAt(Tuple point) const {
+    Tuple objectPos = this->Transform().Inverse() * point;
+    Tuple objectNormal = objectPos - Tuple::Point(0.f, 0.f, 0.f);
+    Tuple worldNormal = this->Transform().Inverse().Transpose() * objectNormal;
+    worldNormal[4] = 0.f;
+    return worldNormal.normalize();
 }

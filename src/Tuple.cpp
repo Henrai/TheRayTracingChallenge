@@ -1,6 +1,7 @@
 #include "Tuple.h"
 #include "MathUtil.h"
 #include <cmath>
+#include <cassert>
 #include <iostream>
 
 using namespace math;
@@ -137,3 +138,9 @@ std::ostream& operator<<(std::ostream& os, const Tuple& t)
     return os;
 }
 
+
+Tuple Tuple::Reflect(const Tuple normal) const {
+    assert(IsVector() && normal.IsVector());
+    return *this -  normal * 2 * this->Dot(normal);
+
+}

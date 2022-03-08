@@ -36,7 +36,8 @@ public:
     Tuple Cross(const Tuple& t) const;
     float Magnitude() const;
     Tuple normalize() const;
-    
+    Tuple Reflect(const Tuple normal) const;
+
     virtual ~Tuple();
 
     static Tuple Point(float x, float y, float z);

@@ -108,3 +108,13 @@ TEST(TupleTest, cross) {
     EXPECT_TRUE (t1.Cross(t2) == Tuple::Vector(-1.0f, 2.0f, -1.0f));
     EXPECT_TRUE (t2.Cross(t1) == Tuple::Vector(1.0f, -2.0f, 1.0f));
 }
+
+TEST(TupleTest, reflecting) {
+    Tuple in = Tuple::Vector(1.f, -1.f, 0.f);
+    Tuple n = Tuple::Vector(0.f, 1.f, 0.f);
+    EXPECT_TRUE(in.Reflect(n) == Tuple::Vector(1.f,1.f,0.f));
+
+    Tuple in2 = Tuple::Vector(0.f, -1.f, 0.f);
+    Tuple n2 = Tuple::Vector(sqrtf(2.f)/2.f, sqrtf(2.f)/2.f, 0.f);
+    EXPECT_TRUE(in2.Reflect(n2) == Tuple::Vector(1.f,0.f,0.f));
+}

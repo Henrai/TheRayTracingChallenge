@@ -6,6 +6,7 @@
 #include <vector>
 
 class Ray;
+class Tuple;
 
 class Shape : public std::enable_shared_from_this<Shape>
 {
@@ -22,6 +23,7 @@ public:
 
 
     virtual void Intersect(const Ray& ray, std::vector<Intersection>& Intersect) const = 0;
+    virtual Tuple NormalAt(Tuple point) const = 0;
     virtual ~Shape() {}
 };
 
