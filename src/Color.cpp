@@ -10,13 +10,13 @@ Color::Color(const Color& color): Tuple(color.R(), color.G(), color.B(), 0.0){
 
 
 float Color::R() const {
-    return X();
+    return x;
 }
 float Color::G() const {
-    return Y();
+    return y;
 }
 float Color::B() const {
-    return Z();
+    return z;
 }
 
 Color Color::HadamardProduct(const Color& c) const {

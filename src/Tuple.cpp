@@ -8,39 +8,24 @@ using namespace math;
 
 Tuple::Tuple(float x, float y, float z, float w)
 {
-    m_x = x;
-    m_y = y;
-    m_z = z;
-    m_w = w;
+    this->x = x;
+    this->y = y;
+    this->z = z;
+    this->w = w;
 }
 
 Tuple::Tuple(const Tuple& t) {
-    m_x = t.X();
-    m_y = t.Y();
-    m_z = t.Z();
-    m_w = t.W();
-}
-
-Tuple::Tuple() {}
-
-float Tuple::X() const {
-    return m_x;
-}
-float Tuple::Y() const {
-    return m_y;
-}
-float Tuple::Z() const {
-    return m_z;
-}
-float Tuple::W() const {
-    return m_w;
+    this->x = t.x;
+    this->y = t.y;
+    this->z = t.z;
+    this->w = t.w;
 }
 
 bool Tuple::IsPoint() const {
     return !IsVector();
 }
 bool Tuple::IsVector() const{
-    return m_w == 0.0;
+    return this->w == 0.0;
 }
 
 Tuple::~Tuple()
@@ -48,22 +33,22 @@ Tuple::~Tuple()
 }
 
 Tuple Tuple::operator+(const Tuple& t) const {
-    return Tuple(m_x + t.X(), m_y+ t.Y(), m_z + t.Z(),m_w + t.W());
+    return Tuple(this->x + t.x, this->y+ t.y, this->z + t.z,this->w + t.w);
 }
 
 Tuple Tuple::operator-(const Tuple& t) const {
-    return Tuple(m_x - t.X(), m_y- t.Y(), m_z - t.Z(),m_w - t.W());
+    return Tuple(this->x - t.x, this->y- t.y, this->z - t.z,this->w - t.w);
 }
 
 bool Tuple::operator==(const Tuple& t) const {
-    return equal(m_x, t.X())
-        && equal(m_y, t.Y())
-        && equal(m_z, t.Z())
-        && equal(m_w, t.W());
+    return equal(this->x, t.x)
+        && equal(this->y, t.y)
+        && equal(this->z, t.z)
+        && equal(this->w, t.w);
 }
 
 Tuple Tuple::operator-() const {
-    return Tuple(-m_x, -m_y, -m_z, -m_w);
+    return Tuple(-this->x, -this->y, -this->z, -this->w);
 }
 
 Tuple Tuple::Point(float x, float y, float z) {
@@ -75,47 +60,47 @@ Tuple Tuple::Vector(float x, float y, float z) {
 }
 
 Tuple Tuple::operator*(float scalar) const {
-    return {m_x * scalar, m_y * scalar , m_z * scalar, m_w * scalar};
+    return {this->x * scalar, this->y * scalar , this->z * scalar, this->w * scalar};
 }
 
 Tuple Tuple::operator/(float scalar) const {
-     return {m_x / scalar, m_y / scalar , m_z / scalar, m_w / scalar};
+     return {this->x / scalar, this->y / scalar , this->z / scalar, this->w / scalar};
 }
 
 float& Tuple::operator[](size_t index) {
     if (index == 0) {
-        return m_x;
+        return this->x;
     } else if (index == 1) {
-        return m_y;
+        return this->y;
     } else if (index == 2) {
-        return m_z;
+        return this->z;
     } else {
-        return m_w;
+        return this->w;
     }
 }
 
 const float Tuple::operator[](size_t index) const {
     if (index == 0) {
-        return m_x;
+        return this->x;
     } else if (index == 1) {
-        return m_y;
+        return this->y;
     } else if (index == 2) {
-        return m_z;
+        return this->z;
     } else {
-        return m_w;
+        return this->w;
     }
 }
 
 
 float Tuple::Dot(const Tuple& t) const {
-    return m_x * t.X() + m_y * t.Y() + m_z * t.Z();
+    return this->x * t.x + this->y * t.y + this->z * t.z;
 }
 
 Tuple Tuple::Cross(const Tuple& t) const {
     return Vector (
-        m_y * t.Z() - m_z * t.Y(),
-        m_z * t.X() - m_x * t.Z(),
-        m_x * t.Y() - m_y * t.X()
+        this->y * t.z - this->z * t.y,
+        this->z * t.x - this->x * t.z,
+        this->x * t.y - this->y * t.x
     );
 }
 
@@ -134,7 +119,7 @@ std::ostream& operator<<(std::ostream& os, const Tuple& t)
     } else {
         os << "V(";
     }
-    os << t.X() << ", " << t.Y() << ", " << t.Z() <<")";
+    os << t.x << ", " << t.y << ", " << t.z <<")";
     return os;
 }
 

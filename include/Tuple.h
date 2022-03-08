@@ -1,23 +1,12 @@
 #pragma once
 
 #include <ostream>
-class Tuple
-{
-private:
-    float m_x;
-    float m_y;
-    float m_z;
-    float m_w;
+class Tuple {
 public:
     Tuple(float x, float y, float z, float w);
     Tuple(const Tuple& t);
-    Tuple();
-
-    float X() const;
-    float Y() const;
-    float Z() const;
-    float W() const;
-
+    Tuple() = default;
+    
     bool IsPoint() const;
     bool IsVector() const;
     
@@ -44,4 +33,6 @@ public:
     static Tuple Vector(float x, float y, float z);
 
     friend std::ostream& operator<<(std::ostream& os, const Tuple& t);
+
+    float x, y, z, w;
 };

@@ -37,9 +37,9 @@ int main() {
     Enviroment e = Enviroment(Tuple::Vector(0, -0.1, 0), Tuple::Vector(-0.01, 0,0)); 
     int tick_num = 0;
     
-    while (p.position.Y() > 0.0)
+    while (p.position.y > 0.0)
     {   
-        c[(int)p.position.X()][550 - 1 - (int) p.position.Y()] = Color::RED;
+        c[(int)p.position.x][550 - 1 - (int) p.position.y] = Color::RED;
         p = tick(e, p);
         cout << tick_num <<": " << p.position << " " << p.velocity << endl;
         tick_num++;
