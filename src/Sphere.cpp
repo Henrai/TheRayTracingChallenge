@@ -27,6 +27,6 @@ Tuple  Sphere::NormalAt(Tuple point) const {
     Tuple objectPos = this->Transform().Inverse() * point;
     Tuple objectNormal = objectPos - Tuple::Point(0.f, 0.f, 0.f);
     Tuple worldNormal = this->Transform().Inverse().Transpose() * objectNormal;
-    worldNormal.w = 0.f;
+    worldNormal[3] = 0.f;
     return worldNormal.normalize();
 }

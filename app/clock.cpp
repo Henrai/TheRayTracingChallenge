@@ -21,7 +21,7 @@ int main() {
         Tuple drawPoint = transM*pos;
 
         cout<<pos<<" "<< drawPoint<<endl;
-        canvas[drawPoint.x][drawPoint.y] = Color::WHITE;
+        canvas[drawPoint[0]][drawPoint[1]] = Color::WHITE;
 
         pos =  matrix::RotationZ(rotationAngle) * pos;
     }  

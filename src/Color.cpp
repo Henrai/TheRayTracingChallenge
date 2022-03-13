@@ -1,29 +1,23 @@
 #include "Color.h"
 
-Color::Color(float r, float g, float b): Tuple(r,g,b,0.0){}
-
-Color::Color(const Color& color): Tuple(color.R(), color.G(), color.B(), 0.0){}
-
-Color::Color(const Tuple& color) : Tuple(color.x, color.y, color.z, 0.0) {}
-
-
 float Color::R() const {
-    return x;
+    return m_data[0];
 }
 float Color::G() const {
-    return y;
+    return m_data[1];
 }
 float Color::B() const {
-    return z;
+    return m_data[2];
 }
 
-Color Color::HadamardProduct(const Color& c) const {
-    return Color(
-        R() * c.R(),
-        G() * c.G(),
-        B() * c.B()
-    );
+
+std::ostream& operator<<(std::ostream& os, const Color& t)
+{
+    
+    os << "RGB: ("<< t.R() << ", " << t.G() << ", " << t.B() <<")";
+    return os;
 }
+
 
 const Color Color::RED(1.0, 0.0, 0.0); 
 const Color Color::GREEN(0.0, 1.0, 0.0);

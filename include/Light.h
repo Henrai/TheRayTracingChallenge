@@ -26,7 +26,7 @@ namespace lighting {
 
         float lightDotNormal = lightV.Dot(normalV);
         Color diffuse = effectiveColor * material.diffuse * std::clamp( lightDotNormal, 0.0f, 1.0f);
-        Color reflectV = -lightV.Reflect(normalV); 
+        Tuple reflectV = -lightV.Reflect(normalV); 
         float reflectDotEye = std::clamp(reflectV.Dot(eyeV) , 0.0f, 1.0f);
         Color specular = light.intensity * material.specular * pow(reflectDotEye, material.shininess) ;
         return ambient + diffuse + specular;
