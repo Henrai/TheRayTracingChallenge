@@ -9,3 +9,7 @@
 - SphereSilhouette
 
 ![Silhouette](./images/silhouette.png)
+
+- Phong Shading
+
+![Phong_Shading](./images/phong_shading.png)

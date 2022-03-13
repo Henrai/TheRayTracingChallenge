@@ -6,10 +6,10 @@ class Color : public Tuple
 {
 
 public:
-    Color();
+    Color() = default;
     Color(float r, float g, float b);
     Color(const Color& color);
-
+    Color(const Tuple& color);
     float R() const;
     float G() const; 
     float B() const;

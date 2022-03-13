@@ -19,6 +19,7 @@ public:
 
     bool operator==(const Intersection& other) const;
     bool operator<(const Intersection& other) const;
+
+    static Intersection Hit(std::vector<Intersection>& xs);
 };
 
-Intersection Hit(std::vector<Intersection>& xs);

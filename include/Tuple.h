@@ -14,6 +14,7 @@ public:
     Tuple operator-(const Tuple& t) const;
     bool operator==(const Tuple& t) const;
     Tuple operator*(float scalar) const;
+    Tuple operator*(const Tuple& t) const;
     Tuple operator/(float scalar) const;
 
     Tuple operator-() const;

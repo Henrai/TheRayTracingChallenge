@@ -63,6 +63,10 @@ Tuple Tuple::operator*(float scalar) const {
     return {this->x * scalar, this->y * scalar , this->z * scalar, this->w * scalar};
 }
 
+Tuple Tuple::operator*(const Tuple& t) const {
+    return {this->x * t.x, this->y * t.y , this->z * t.z, this->w * t.w};
+}
+
 Tuple Tuple::operator/(float scalar) const {
      return {this->x / scalar, this->y / scalar , this->z / scalar, this->w / scalar};
 }
@@ -105,7 +109,7 @@ Tuple Tuple::Cross(const Tuple& t) const {
 }
 
 float Tuple::Magnitude() const {
-    return std::sqrt(this->Dot(*this));
+    return std::sqrtf(this->Dot(*this));
 }
 
 Tuple Tuple::normalize() const {

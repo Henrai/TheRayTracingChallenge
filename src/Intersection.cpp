@@ -10,7 +10,7 @@ bool Intersection::operator<(const Intersection& other) const {
     return m_hitTime < other.Distance();
 }
 
-Intersection Hit(std::vector<Intersection>& xs)
+Intersection Intersection::Hit(std::vector<Intersection>& xs)
 {
     sort(xs.begin(), xs.end());
     for (auto const& i : xs)

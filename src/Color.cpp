@@ -1,12 +1,10 @@
 #include "Color.h"
 
-Color::Color() {}
-Color::Color(float r, float g, float b): Tuple(r,g,b,0.0){
-}
+Color::Color(float r, float g, float b): Tuple(r,g,b,0.0){}
 
-Color::Color(const Color& color): Tuple(color.R(), color.G(), color.B(), 0.0){ 
-}
+Color::Color(const Color& color): Tuple(color.R(), color.G(), color.B(), 0.0){}
 
+Color::Color(const Tuple& color) : Tuple(color.x, color.y, color.z, 0.0) {}
 
 
 float Color::R() const {

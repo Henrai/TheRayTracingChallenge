@@ -41,7 +41,7 @@ TEST (IntersectTest, FindHit) {
     intersects.push_back(i3);
     intersects.push_back(i4);
 
-    Intersection hit = Hit(intersects);
+    Intersection hit = Intersection::Hit(intersects);
    
     EXPECT_TRUE(hit == i1);
 }
