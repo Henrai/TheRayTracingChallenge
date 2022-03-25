@@ -31,7 +31,7 @@ int main() {
             Tuple pos = Tuple::Point(world_x, world_y, wall_z);
             auto r = Ray(rayOrigin, (pos - rayOrigin).normalize());
             std::vector<Intersection> xs;
-            r.Intersect(sphere, xs);
+            sphere->Intersect(r, xs);
             std::cout<<xs.size()<<std::endl;
             for (auto q : xs) {
                 std::cout << q.Distance() <<" ";

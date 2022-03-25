@@ -16,10 +16,11 @@ struct PointLight
 {
    Tuple position;
    Color intensity;
+   PointLight(Tuple p, Color i) : position(p), intensity(i) {}
 };
 
 namespace lighting {
-    Color PhongLinghting(Material material, PointLight light, Tuple point, Tuple eyeV, Tuple normalV) {
+    static Color PhongLinghting(Material material, PointLight light, Tuple point, Tuple eyeV, Tuple normalV) {
         Color effectiveColor = material.color * light.intensity;
         Tuple lightV = (light.position - point).normalize();
         Color ambient = effectiveColor * material.ambient;

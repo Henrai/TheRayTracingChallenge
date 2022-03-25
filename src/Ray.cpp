@@ -12,9 +12,3 @@ Ray Ray::Trasnsform(const Matrix4& trans) const {
     Tuple newDir = trans * m_direction;
     return {newOrin, newDir};
 }
-
-
-void Ray::Intersect(std::shared_ptr<const Shape> shape, std::vector<Intersection>& intersects) {
-    Ray ray = this->Trasnsform(shape->InvTransform());
-    shape->Intersect(ray, intersects);
-}

@@ -8,10 +8,10 @@
 
 class Sphere : public Shape
 {
+private:
+    void DoIntersect(const Ray& ray, std::vector<Intersection>& intersects) const override;
+
 public:
-
     ~Sphere() {}
-
-    void Intersect(const Ray& ray, std::vector<Intersection>& Intersect) const override;
     Tuple NormalAt(Tuple point) const override;
 };

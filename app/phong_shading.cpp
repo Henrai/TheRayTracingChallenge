@@ -36,7 +36,7 @@ int main() {
             Tuple pos = Tuple::Point(world_x, world_y, wall_z);
             Ray r = Ray(rayOrigin, (pos - rayOrigin).normalize());
             std::vector<Intersection> xs;
-            r.Intersect(sphere, xs);
+            sphere->Intersect(r, xs);
 
             Intersection hit = Intersection::Hit(xs);
         

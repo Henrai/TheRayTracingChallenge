@@ -1,8 +1,17 @@
 #pragma once
 
+#include "Tuple.h"
+
 #include<memory>
 
 class Shape;
+
+struct HitResult {
+    std::shared_ptr<const Shape> shape;
+    Tuple point;
+    Tuple eyev;
+    Tuple normalv;
+};
 
 class Intersection
 {

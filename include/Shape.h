@@ -17,6 +17,8 @@ Matrix4 m_transform;
 Matrix4 m_invTransform;
 Material m_material;
 
+virtual void DoIntersect(const Ray& ray, std::vector<Intersection>& intersect) const = 0;
+
 public:
     Shape() :m_transform(Matrix4::Identity()), m_invTransform(Matrix4::Identity()) {}
 
@@ -26,7 +28,8 @@ public:
     const Material& getMaterial() const { return m_material;}
     Material& getMaterial(){ return m_material;}
     
-    virtual void Intersect(const Ray& ray, std::vector<Intersection>& Intersect) const = 0;
+    void Intersect(const Ray& ray, std::vector<Intersection>& intersect) const;
+
     virtual Tuple NormalAt(Tuple point) const = 0;
     virtual ~Shape() {}
 };

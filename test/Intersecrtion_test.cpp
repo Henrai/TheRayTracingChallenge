@@ -52,7 +52,7 @@ TEST (IntersectTest, IntersectWithScaledSphere) {
     shape->SetTransform(matrix::Scale(2.f,2.f,2.f));
     std::vector<Intersection> intersects = {};
 
-    r.Intersect(shape, intersects);
+    shape->Intersect(r, intersects);
 
     EXPECT_EQ(intersects.size(), 2);
     EXPECT_FLOAT_EQ(intersects[0].Distance(), 3.f);

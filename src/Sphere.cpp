@@ -5,7 +5,7 @@
 #include <cmath>
 #include <vector>
 
-void Sphere::Intersect(const Ray& ray, std::vector<Intersection>& Intersect) const {
+void Sphere::DoIntersect(const Ray& ray, std::vector<Intersection>& intersect) const {
 
     Tuple sphereToRay = ray.Origin() - Tuple::Point(0.f, 0.f , 0.f);
 
@@ -19,8 +19,8 @@ void Sphere::Intersect(const Ray& ray, std::vector<Intersection>& Intersect) con
         return;
     }
     
-    Intersect.push_back(Intersection(shared_from_this(), (-1*b - sqrtf(delta))/(2*a)));
-    Intersect.push_back(Intersection(shared_from_this(),  (-1*b + sqrtf(delta))/(2*a)));
+    intersect.push_back(Intersection(shared_from_this(), (-1*b - sqrtf(delta))/(2*a)));
+    intersect.push_back(Intersection(shared_from_this(),  (-1*b + sqrtf(delta))/(2*a)));
 }
 
 Tuple  Sphere::NormalAt(Tuple point) const {
