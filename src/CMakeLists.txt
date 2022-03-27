@@ -13,6 +13,8 @@ add_library(${LIBRARY}
     Sphere.cpp
     Intersection.cpp
     World.cpp
+    Camera.cpp
+    Renderer.cpp
     ${HEADER_LIST})
 
 target_include_directories(${LIBRARY} PUBLIC ../include)

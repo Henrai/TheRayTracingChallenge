@@ -5,6 +5,10 @@
 
 using namespace math;
 
+/***
+ * Both the Color and Tuple share the same vector operation
+ * abstaract the Vector trait to get rid of duplicate code.
+ */
 template <class T>
 class VectorTrait
 {
