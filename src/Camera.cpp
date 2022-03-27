@@ -13,7 +13,6 @@ Camera::Camera(int h, int v, float fieldOfView):
         m_hsize(h), m_vsize(v), m_fov(fieldOfView), m_transform(Matrix4::Identity()) {
     float halfView = std::tanf(m_fov/2);
     float aspect = static_cast<float>(m_hsize) / static_cast<float>(m_vsize);
-    cout << "half view: " << halfView <<" aspect: " << aspect <<endl;
     if (aspect >= 1) {
         m_halfWidth = halfView;
         m_halfHeight = halfView / aspect;
@@ -21,8 +20,6 @@ Camera::Camera(int h, int v, float fieldOfView):
         m_halfWidth = halfView * aspect;
         m_halfHeight = halfView;
     }
-
-    cout << "halfWidth: " << m_halfWidth << " hsize" << m_hsize << endl;
 
     m_pixelSize = m_halfWidth * 2 / static_cast<float>(m_hsize);
 }

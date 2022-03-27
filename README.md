@@ -13,3 +13,6 @@
 - Phong Shading
 
 ![Phong_Shading](./images/phong_shading.png)
+
+- Scene 
+![Scene](./images/scene.png)
