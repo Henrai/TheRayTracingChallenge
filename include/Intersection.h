@@ -5,8 +5,11 @@
 #include<memory>
 
 class Shape;
+class Ray;
 
 struct HitResult {
+    bool isInside;
+    float hitTime;
     std::shared_ptr<const Shape> shape;
     Tuple point;
     Tuple eyev;
@@ -29,6 +32,8 @@ public:
     bool operator==(const Intersection& other) const;
     bool operator<(const Intersection& other) const;
 
+    static HitResult getHitResult(const Intersection& intersection, const Ray& ray);
+    
     static Intersection Hit(std::vector<Intersection>& xs);
 };
 

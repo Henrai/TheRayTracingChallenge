@@ -47,7 +47,7 @@ int main() {
 
             if (hit.Object() != nullptr) {
 
-                Tuple position = r.position(hit.Distance());
+                Tuple position = r.Position(hit.Distance());
                 Tuple normal = hit.Object()->NormalAt(position);
                 Tuple eye = -r.Direction();
 

@@ -12,6 +12,7 @@ add_library(${LIBRARY}
     Shape.cpp
     Sphere.cpp
     Intersection.cpp
+    World.cpp
     ${HEADER_LIST})
 
 target_include_directories(${LIBRARY} PUBLIC ../include)

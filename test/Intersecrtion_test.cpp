@@ -58,3 +58,27 @@ TEST (IntersectTest, IntersectWithScaledSphere) {
     EXPECT_FLOAT_EQ(intersects[0].Distance(), 3.f);
     EXPECT_FLOAT_EQ(intersects[1].Distance(), 7.f);
 }
+
+
+TEST(IntersectTest, HitOutSide) {
+    std::shared_ptr<Shape> shape = std::make_shared<Sphere>();
+    Ray r(Tuple::Point(0.f, 0.f, -5.f), Tuple::Vector(0.f, 0.f, 1.f));
+    Intersection intersect(shape, 4.0f);
+
+    HitResult res = Intersection::getHitResult(intersect, r);
+
+    EXPECT_TRUE(!res.isInside);
+}
+
+TEST(IntersectTest, HitInSide) {
+    std::shared_ptr<Shape> shape = std::make_shared<Sphere>();
+    Ray r(Tuple::Point(0.f, 0.f, 0.f), Tuple::Vector(0.f, 0.f, 1.f));
+    Intersection intersect(shape, 1.f);
+
+    HitResult res = Intersection::getHitResult(intersect, r);
+
+    EXPECT_TRUE(res.isInside);
+    EXPECT_TRUE(res.eyev == Tuple::Vector(0.f, 0.f, -1.f));
+    EXPECT_TRUE(res.point == Tuple::Point(0.f, 0.f, 0.f));
+    EXPECT_TRUE(res.normalv == Tuple::Vector(0.f, 0.f, -1.f));
+}

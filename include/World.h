@@ -5,6 +5,9 @@
 
 #include<vector>
 
+struct HitResult;
+class Color;
+
 class World
 {
 private:
@@ -25,13 +28,22 @@ public:
 
     const std::vector<std::shared_ptr<const PointLight> > getLights() const {
         return m_lights;
-    }    
+    }   
 
-    void Intersect(const Ray& ray, std::vector<Intersection>& intersects) {
+    void clearLight() {
+        m_lights.clear();
+    } 
+
+    void clearObject() {
+        m_objects.clear();
+    }
+
+    void Intersect(const Ray& ray, std::vector<Intersection>& intersects) const {
         for(auto i : m_objects) {
             i->Intersect(ray, intersects);
         }
     } 
+
+    Color ShadeHit(const HitResult& hit) const;
+    Color ColorAt(const Ray& ray) const;
 };
-
-

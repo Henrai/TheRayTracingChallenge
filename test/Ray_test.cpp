@@ -11,10 +11,10 @@ using namespace std;
 TEST(RayTest, pointFromADistance){
     Ray r(Tuple::Point(2.f,3.f,4.f), Tuple::Vector(1.f,0.f,0.f));
 
-    EXPECT_TRUE (r.position(0.f) == Tuple::Point(2.f,3.f,4.f));
-    EXPECT_TRUE (r.position(1.f) == Tuple::Point(3.f,3.f,4.f));
-    EXPECT_TRUE (r.position(-1.f) == Tuple::Point(1.f,3.f,4.f));
-    EXPECT_TRUE (r.position(2.5f) == Tuple::Point(4.5f,3.f,4.f));
+    EXPECT_TRUE (r.Position(0.f) == Tuple::Point(2.f,3.f,4.f));
+    EXPECT_TRUE (r.Position(1.f) == Tuple::Point(3.f,3.f,4.f));
+    EXPECT_TRUE (r.Position(-1.f) == Tuple::Point(1.f,3.f,4.f));
+    EXPECT_TRUE (r.Position(2.5f) == Tuple::Point(4.5f,3.f,4.f));
 }
 
 TEST(RayTest, Transformation) {

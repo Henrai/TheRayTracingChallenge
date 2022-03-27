@@ -1,4 +1,5 @@
 #include <Intersection.h>
+#include <Ray.h>
 
 #include <vector>
 
@@ -19,4 +20,24 @@ Intersection Intersection::Hit(std::vector<Intersection>& xs)
             return i;
     }
     return {nullptr, 0.f};
+}
+
+HitResult Intersection::getHitResult(const Intersection& intersection, const Ray& ray) {
+    if (intersection.Object() == nullptr) {
+        HitResult res;
+        res.shape = nullptr;
+        return res;
+    }
+    Tuple hitPoint = ray.Position(intersection.Distance());
+    Tuple normalV = intersection.Object()->NormalAt(hitPoint);
+    bool isInside = normalV.Dot(-ray.Direction()) < 0;
+    if(isInside) normalV = -normalV;
+    return {
+        isInside,
+        intersection.Distance(),
+        intersection.Object(),
+        hitPoint,
+        -ray.Direction(),
+        normalV,
+    };
 }

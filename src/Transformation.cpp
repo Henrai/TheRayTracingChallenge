@@ -60,4 +60,18 @@ namespace matrix {
         ans[2][1] = zy;
         return ans;
     }
+    
+    Matrix4 ViewTransformation(Tuple from, Tuple to, Tuple up) {
+        Tuple lookAt = (to - from).normalize();
+        Tuple upn = up.normalize();
+        Tuple lxu = lookAt.Cross(upn).normalize();
+        // The up may not perpendicular to the lookat vector, apply cross
+        // product again to tild it correct.
+        Tuple trueUp = lxu.Cross(lookAt);
+        Matrix4 ans = Matrix4::Identity();
+        ans[0][0] = lxu[0]; ans[0][1] = lxu[1]; ans[0][2] = lxu[2]; 
+        ans[1][0] = trueUp[0]; ans[1][1] = trueUp[1]; ans[1][2] = trueUp[2];
+        ans[2][0] = -lookAt[0]; ans[2][1] = -lookAt[1]; ans[2][2] = -lookAt[2];
+        return ans; 
+    }
 }
