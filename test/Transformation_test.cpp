@@ -4,6 +4,10 @@
 #include <cmath>
 #include <gtest/gtest.h>
 
+#include <iostream>
+
+using namespace std;
+
 TEST(TransTest, translationActOnPoint)
 {
     Matrix4 tx = matrix::Translation(5.f, -3.f, 2.f);
@@ -139,4 +143,49 @@ TEST(TransTest,  multiolyAppliedInReversedOrder)
     Matrix4 c = matrix::Translation(10.f, 5.f, 7.f);
     Matrix4 tx = c*b*a;
     EXPECT_TRUE( tx * p == Tuple::Point(15.f, 0.f, 7.f));
+}
+
+TEST(TransTest, identityViewTrans) {
+    Tuple from = Tuple::Point(0.f, 0.f, 0.f);
+    Tuple to = Tuple::Point(0.f, 0.f, -1.f);
+    Tuple up = Tuple::Vector(0.f, 1.f, 0.f);
+
+    Matrix4 t = matrix::ViewTransformation(from, to, up);
+    EXPECT_TRUE(t == Matrix4::Identity());
+}
+
+TEST(TransTest, lookAtPositiveZ) {
+    Tuple from = Tuple::Point(0.f, 0.f, 0.f);
+    Tuple to = Tuple::Point(0.f, 0.f, 1.f);
+    Tuple up = Tuple::Vector(0.f, 1.f, 0.f);
+
+    Matrix4 t = matrix::ViewTransformation(from, to, up);
+    EXPECT_TRUE(t == matrix::Scale(-1.f, 1.f, -1.f)); 
+}
+
+TEST(TransTest, ViewTrnsWorld) {
+    Tuple from = Tuple::Point(0.f, 0.f, 8.f);
+    Tuple to = Tuple::Point(0.f, 0.f, 0.f);
+    Tuple up = Tuple::Vector(0.f, 1.f, 0.f);
+
+    Matrix4 t = matrix::ViewTransformation(from, to, up);
+
+    cout << t << endl;
+    EXPECT_TRUE(t == matrix::Translation(0.f, 0.f, -8.f)); 
+}
+
+TEST(TransTest, ArbitraryViewTrns) {
+    Tuple from = Tuple::Point(1.f, 3.f, 2.f);
+    Tuple to = Tuple::Point(4.f, -2.f, 8.f);
+    Tuple up = Tuple::Vector(1.f, 1.f, 0.f);
+
+    Matrix4 t = matrix::ViewTransformation(from, to, up);
+
+    Matrix4 ans = Matrix4::Identity();
+    ans[0][0] = -.50709f; ans[0][1] = .50709f; ans[0][2] = .67612f; ans[0][3] = -2.36643f;
+    ans[1][0] = .76772f; ans[1][1] = .60609f; ans[1][2] = .12122f; ans[1][3] = -2.82843f;
+    ans[2][0] = -.35857f; ans[2][1] = .59761f; ans[2][2] = -.71714f; 
+
+    cout << t << endl << ans << endl;
+    EXPECT_TRUE(t == ans); 
 }
