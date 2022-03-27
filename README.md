@@ -1,3 +1,5 @@
+# A simple 3d renderer based on "The Ray tracing challenge"
+
 - Projectile
 
 ![Projectile](./images/projectile.png)
@@ -15,4 +17,5 @@
 ![Phong_Shading](./images/phong_shading.png)
 
 - Scene 
+
 ![Scene](./images/scene.png)
