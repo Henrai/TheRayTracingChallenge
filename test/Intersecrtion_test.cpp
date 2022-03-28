@@ -2,10 +2,15 @@
 #include <Ray.h>
 #include <Intersection.h>
 #include <Sphere.h>
+#include <MathUtil.h>
 
 #include <gtest/gtest.h>
 #include<memory>
 #include<vector>
+
+#include <iostream>
+
+using namespace std;
 
 TEST(IntersectTest, Initialize) {
     std::shared_ptr<Shape> shape = std::make_shared<Sphere>();
@@ -81,4 +86,18 @@ TEST(IntersectTest, HitInSide) {
     EXPECT_TRUE(res.eyev == Tuple::Vector(0.f, 0.f, -1.f));
     EXPECT_TRUE(res.point == Tuple::Point(0.f, 0.f, 0.f));
     EXPECT_TRUE(res.normalv == Tuple::Vector(0.f, 0.f, -1.f));
+}
+
+TEST(IntersectTest, HitOffset) {
+    std::shared_ptr<Shape> shape = std::make_shared<Sphere>();
+    shape->SetTransform(matrix::Translation(0,0,1));
+
+    Ray r(Tuple::Point(0.f, 0.f, -5.f), Tuple::Vector(0.f, 0.f, 1.f));
+    
+    Intersection intersect(shape, 5.f);
+
+    HitResult hit = Intersection::getHitResult(intersect, r);
+    cout << hit.overPoint << endl << hit.point << endl;
+    EXPECT_TRUE(hit.overPoint[2] < EPSILON/2);
+    EXPECT_TRUE(hit.point[2] > hit.overPoint[2]);
 }

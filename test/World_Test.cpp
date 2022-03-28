@@ -89,7 +89,7 @@ TEST(WorldTest, intersectionBehindRay) {
     std::unique_ptr<World> world = std::make_unique<World>();
 
     std::shared_ptr<PointLight> light = std::make_shared<PointLight>(
-       PointLight(Tuple::Point(-10,-10,-10), 
+       PointLight(Tuple::Point(-10, 10, -10), 
         Color(1,1,1)));
     world->AddLight(light);
 
@@ -109,4 +109,32 @@ TEST(WorldTest, intersectionBehindRay) {
 
     Color c = world->ColorAt(ray);
     EXPECT_TRUE(c == shape2->getMaterial().color);
+}
+
+TEST(WorldTest, NoShadowAndNoHit) {
+    std::unique_ptr<World> world = defaultWorld();
+    auto light = world->getLights()[0];
+    Tuple point = Tuple::Point(0,10,0);
+    EXPECT_FALSE(world->IsShadowed(point, light));
+}
+
+TEST(WorldTest, HasShadow) {
+    std::unique_ptr<World> world = defaultWorld();
+    auto light = world->getLights()[0];
+    Tuple point = Tuple::Point(10, -10, 10);
+    EXPECT_TRUE(world->IsShadowed(point, light));
+}
+
+TEST(WorldTest, NoShadowObjectBehindLight) {
+    std::unique_ptr<World> world = defaultWorld();
+    auto light = world->getLights()[0];
+    Tuple point = Tuple::Point(-20, 20, -20);
+    EXPECT_FALSE(world->IsShadowed(point, light));
+}
+
+TEST(WorldTest, NoShadowObjectBehindPoint) {
+    std::unique_ptr<World> world = defaultWorld();
+    auto light = world->getLights()[0];
+    Tuple point = Tuple::Point(-2, 2, -2);
+    EXPECT_FALSE(world->IsShadowed(point, light));
 }

@@ -46,4 +46,5 @@ public:
 
     Color ShadeHit(const HitResult& hit) const;
     Color ColorAt(const Ray& ray) const;
+    bool IsShadowed(const Tuple& point, std::shared_ptr<const PointLight> light) const;
 };

@@ -55,6 +55,19 @@ TEST(MaterialTest, EyeBetweenLSWithLOffset) {
     EXPECT_TRUE(result == Color(.7364f, .7364f, .7364f));
 }
 
+TEST(MaterialTest, SurfaceInShadow) {
+    Material m;
+    Tuple position = Tuple::Point(0.f, 0.f, 0.f);
+
+    Tuple eyeV = Tuple::Vector(0.f, 0.f, -1.f);
+    Tuple normalV = Tuple::Vector(0.f, 0.f, -1.f);
+
+    PointLight light  {Tuple::Point(0.f, 10.f, -10.f), Color(1.f,1.f,1.f)};
+    bool isShadowed = true;
+    Color result = lighting::PhongLinghting(m, light, position, eyeV, normalV, isShadowed);
+
+    EXPECT_TRUE(result == Color::SHADOW);
+}
 
 TEST(MaterialTest, EyeBetweenLSWithLEReflect) {
     Material m;

@@ -14,6 +14,7 @@ struct HitResult {
     Tuple point;
     Tuple eyev;
     Tuple normalv;
+    Tuple overPoint;
 };
 
 class Intersection

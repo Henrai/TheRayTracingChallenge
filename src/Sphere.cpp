@@ -7,13 +7,13 @@
 
 void Sphere::DoIntersect(const Ray& ray, std::vector<Intersection>& intersect) const {
 
-    Tuple sphereToRay = ray.Origin() - Tuple::Point(0.f, 0.f , 0.f);
-
-    float a = ray.Direction().Dot(ray.Direction());
-    float b = 2 * ray.Direction().Dot(sphereToRay);
-    float c = sphereToRay.Dot(sphereToRay) - 1.f;
+   Tuple sphereToRay = ray.Origin() - Tuple::Point(0.f, 0.f , 0.f);
+   
+   double a = ray.Direction().Dot(ray.Direction());
+   double b = 2 * ray.Direction().Dot(sphereToRay);
+   double c = sphereToRay.Dot(sphereToRay) - 1.f;
     
-    float delta = b*b - 4*a*c;
+   double delta = b*b - 4*a*c;
     
     if (delta < 0) {
         return;

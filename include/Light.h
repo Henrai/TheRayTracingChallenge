@@ -20,7 +20,10 @@ struct PointLight
 };
 
 namespace lighting {
-    static Color PhongLinghting(Material material, PointLight light, Tuple point, Tuple eyeV, Tuple normalV) {
+    static Color PhongLinghting(Material material, PointLight light, Tuple point, Tuple eyeV, Tuple normalV, bool isShadowed = false){
+        if (isShadowed) {
+            return Color::SHADOW;
+        }
         Color effectiveColor = material.color * light.intensity;
         Tuple lightV = (light.position - point).normalize();
         Color ambient = effectiveColor * material.ambient;

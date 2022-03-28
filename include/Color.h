@@ -39,4 +39,5 @@ public:
     static const Color BLUE;
     static const Color BLACK;
     static const Color WHITE;
+    static const Color SHADOW;
 };

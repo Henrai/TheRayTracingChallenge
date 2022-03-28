@@ -34,6 +34,7 @@ int main() {
       * matrix::RotationX(M_PI_2) 
       * matrix::Scale(10.f, 0.01f, 10.f));
     leftWall->getMaterial() = floor->getMaterial();
+    //leftWall->getMaterial().color = Color::GREEN;
 
     // set up right wall
     std::shared_ptr<Shape> rightWall = std::make_shared<Sphere>();
@@ -43,27 +44,28 @@ int main() {
       * matrix::RotationX(M_PI_2) 
       * matrix::Scale(10.f, 0.01f, 10.f));
     rightWall->getMaterial() = floor->getMaterial();
+    //rightWall->getMaterial().color = Color::RED;
 
-    // set up middle ball
-    std::shared_ptr<Shape> middleBall = std::make_shared<Sphere>();
-    middleBall->SetTransform(matrix::Translation(-0.5f, 1.f, 0.5f));
-    middleBall->getMaterial().color = Color(0.1f, 1.f, 0.5f);
-    middleBall->getMaterial().diffuse = .7f;
-    middleBall->getMaterial().specular = .3f;
+    // // set up middle ball
+    // std::shared_ptr<Shape> middleBall = std::make_shared<Sphere>();
+    // middleBall->SetTransform(matrix::Translation(-0.5f, 1.f, 0.5f));
+    // middleBall->getMaterial().color = Color(0.1f, 1.f, 0.5f);
+    // middleBall->getMaterial().diffuse = .7f;
+    // middleBall->getMaterial().specular = .3f;
 
-    // set up left ball 
-    std::shared_ptr<Shape> leftBall = std::make_shared<Sphere>();
-    leftBall->SetTransform(matrix::Translation(1.5f, .5f, -0.5f) * matrix::Scale(0.5, 0.5, 0.5));
-    leftBall->getMaterial().color = Color(0.5f, 1.f, 0.1f);
-    leftBall->getMaterial().diffuse = .7f;
-    leftBall->getMaterial().specular = .3f;
+    // // set up left ball 
+    // std::shared_ptr<Shape> leftBall = std::make_shared<Sphere>();
+    // leftBall->SetTransform(matrix::Translation(1.5f, .5f, -0.5f) * matrix::Scale(0.5, 0.5, 0.5));
+    // leftBall->getMaterial().color = Color(0.5f, 1.f, 0.1f);
+    // leftBall->getMaterial().diffuse = .7f;
+    // leftBall->getMaterial().specular = .3f;
 
-    // set up right ball
-    std::shared_ptr<Shape> rightBall = std::make_shared<Sphere>();
-    rightBall->SetTransform(matrix::Translation(-1.5f, .33f, -0.75f) * matrix::Scale(0.33f, 0.33f, 0.33f));
-    rightBall->getMaterial().color = Color(1.f, .8f, 0.1f);
-    rightBall->getMaterial().diffuse = .7f;
-    rightBall->getMaterial().specular = .3f;
+    // // set up right ball
+    // std::shared_ptr<Shape> rightBall = std::make_shared<Sphere>();
+    // rightBall->SetTransform(matrix::Translation(-1.5f, .33f, -0.75f) * matrix::Scale(0.33f, 0.33f, 0.33f));
+    // rightBall->getMaterial().color = Color(1.f, .8f, 0.1f);
+    // rightBall->getMaterial().diffuse = .7f;
+    // rightBall->getMaterial().specular = .3f;
 
     std::unique_ptr<World> world = std::make_unique<World>();
 
@@ -72,9 +74,9 @@ int main() {
     world->AddShape(floor);
     world->AddShape(leftWall);
     world->AddShape(rightWall);
-    world->AddShape(leftBall);
-    world->AddShape(middleBall);
-    world->AddShape(rightBall);
+    // world->AddShape(leftBall);
+    // world->AddShape(middleBall);
+    // world->AddShape(rightBall);
 
     Camera camera(H_SIZE, V_SIZE, M_PI/3.f);
     camera.UpdateTransform(

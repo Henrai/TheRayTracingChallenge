@@ -4,7 +4,7 @@ static std::unique_ptr<World> defaultWorld() {
     std::unique_ptr<World> world = std::make_unique<World>();
 
     std::shared_ptr<PointLight> light = std::make_shared<PointLight>(
-       PointLight(Tuple::Point(-10,-10,-10), 
+       PointLight(Tuple::Point(-10, 10,-10), 
         Color(1,1,1)));
     world->AddLight(light);
 
