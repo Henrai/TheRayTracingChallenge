@@ -1,6 +1,6 @@
 #pragma once 
 
-#include "Shape.h"
+#include "Shapes/Shape.h"
 #include "Light.h"
 
 #include<vector>

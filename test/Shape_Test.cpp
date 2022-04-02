@@ -1,5 +1,5 @@
-#include <Sphere.h>
-#include <Shape.h>
+#include <Shapes/Sphere.h>
+#include <Shapes/Shape.h>
 #include <Matrix.h>
 #include <Transformation.h>
 

@@ -1,7 +1,7 @@
 #include <World.h>
 #include <Tuple.h>
 #include <Transformation.h>
-#include <Sphere.h>
+#include <Shapes/Sphere.h>
 #include <Light.h>
 #include <Material.h>
 

@@ -3,8 +3,8 @@
 #include <MathUtil.h>
 #include <Color.h>
 #include <Canvas.h>
-#include <Sphere.h>
-#include <Shape.h>
+#include <Shapes/Sphere.h>
+#include <Shapes/Shape.h>
 #include <Material.h>
 #include <Light.h>
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Intersection.h"
-#include "Matrix.h"
-#include "Material.h"
+#include "../Intersection.h"
+#include "../Matrix.h"
+#include "../Material.h"
 
 #include <vector>
 

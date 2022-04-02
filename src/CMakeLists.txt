@@ -9,8 +9,8 @@ add_library(${LIBRARY}
     Canvas.cpp
     Transformation.cpp
     Ray.cpp
-    Shape.cpp
-    Sphere.cpp
+    Shapes/Shape.cpp
+    Shapes/Sphere.cpp
     Intersection.cpp
     World.cpp
     Camera.cpp

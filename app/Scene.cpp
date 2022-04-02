@@ -1,11 +1,11 @@
-#include <Shape.h>
+#include <Shapes/Shape.h>
 #include <World.h>
 #include <Material.h>
 #include <Light.h>
 #include <Transformation.h>
 #include <Camera.h>
 #include <Renderer.h>
-#include <Sphere.h>
+#include <Shapes/Sphere.h>
 #include <Canvas.h>
 
 #include <cmath>

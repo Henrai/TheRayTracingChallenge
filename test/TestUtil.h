@@ -1,5 +1,11 @@
 #pragma once 
 
+#include <World.h>
+#include <Shapes/Shape.h>
+#include <Shapes/Sphere.h>
+#include <Light.h>
+#include <Color.h>
+
 static std::unique_ptr<World> defaultWorld() {
     std::unique_ptr<World> world = std::make_unique<World>();
 

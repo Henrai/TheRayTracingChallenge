@@ -1,7 +1,7 @@
 #include <Tuple.h>
 #include <Ray.h>
 #include <Intersection.h>
-#include <Sphere.h>
+#include <Shapes/Sphere.h>
 #include <MathUtil.h>
 
 #include <gtest/gtest.h>

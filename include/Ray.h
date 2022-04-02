@@ -2,7 +2,7 @@
 
 #include "Tuple.h"
 #include "Matrix.h"
-#include "Shape.h"
+#include "Shapes/Shape.h"
 
 #include <vector>
 

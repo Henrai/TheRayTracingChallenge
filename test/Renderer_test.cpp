@@ -4,8 +4,8 @@
 #include <Canvas.h>
 #include <Renderer.h>
 #include <Light.h>
-#include <Shape.h>
-#include <Sphere.h>
+#include <Shapes/Shape.h>
+#include <Shapes/Sphere.h>
 #include <World.h>
 
 #include <gtest/gtest.h>
