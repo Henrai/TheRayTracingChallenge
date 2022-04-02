@@ -49,7 +49,7 @@ TEST(WorldTest, ShadingAtIntersect) {
     HitResult hit = Intersection::getHitResult(intersect, ray);
     Color c = world->ShadeHit(hit);
     cout << c <<endl;
-    EXPECT_TRUE(c == Color(0.38066f, 0.47583f, 0.2854959f));
+    EXPECT_TRUE(c == Color(0.380637f, 0.475797f, 0.285478f));
 }
 
 TEST(WorldTest, ShadingAtIntersectInside) {
@@ -66,7 +66,7 @@ TEST(WorldTest, ShadingAtIntersectInside) {
     HitResult hit = Intersection::getHitResult(intersect, ray);
     Color c = world->ShadeHit(hit);
     cout << c <<endl;
-    EXPECT_TRUE(c == Color(0.90498, 0.90498f, 0.90498f));
+    EXPECT_TRUE(c == Color(0.904662, 0.904662f, 0.904662f));
 }
 
 TEST(WorldTest, RayMiss) {
@@ -81,34 +81,8 @@ TEST(WorldTest, RayHit) {
     std::unique_ptr<World> world = defaultWorld();
     Ray ray(Tuple::Point(0.f, 0.f, -5.f), Tuple::Vector(0.f, 0.f, 1.f));
     Color c = world->ColorAt(ray);
-
-    EXPECT_TRUE(c == Color(0.38066f, 0.47583f, 0.28549f));
-}
-
-TEST(WorldTest, intersectionBehindRay) {
-    std::unique_ptr<World> world = std::make_unique<World>();
-
-    std::shared_ptr<PointLight> light = std::make_shared<PointLight>(
-       PointLight(Tuple::Point(-10, 10, -10), 
-        Color(1,1,1)));
-    world->AddLight(light);
-
-    std::shared_ptr<Shape> shape1 = std::make_shared<Sphere>();
-    shape1->getMaterial().color = Color(0.8f, 1.0f, 0.6f);
-    shape1->getMaterial().diffuse = 0.7f;
-    shape1->getMaterial().specular = 0.2f;
-    shape1->getMaterial().ambient = 1.f;
-
-    std::shared_ptr<Shape> shape2 = std::make_shared<Sphere>();
-    shape2->getMaterial().ambient = 1.f;
-    shape2->SetTransform(matrix::Scale(0.5f, 0.5f, 0.5f));
-    world->AddShape(shape1);
-    world->AddShape(shape2);
-
-    Ray ray(Tuple::Point(0.f, 0.f,.75f), Tuple::Vector(0.f, 0.f, -1.f));
-
-    Color c = world->ColorAt(ray);
-    EXPECT_TRUE(c == shape2->getMaterial().color);
+    cout << c << endl;
+    EXPECT_TRUE(c == Color(0.380637f, 0.475797f, 0.285478f));
 }
 
 TEST(WorldTest, NoShadowAndNoHit) {

@@ -24,6 +24,5 @@ TEST(RendererTest, renderSample) {
 
     Renderer renderer;
     Canvas image = renderer.Render(*world.get(), camera);
-
-    EXPECT_TRUE(image[5][5] == Color(.38066f, .47583f, .2855f));
+    EXPECT_TRUE(image[5][5] == Color(.380637f, .475797f, .285478f));
 }

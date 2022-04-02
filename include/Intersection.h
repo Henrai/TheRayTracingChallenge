@@ -4,6 +4,8 @@
 
 #include<memory>
 
+#define SHADOW_OFFSET 0.001
+
 class Shape;
 class Ray;
 

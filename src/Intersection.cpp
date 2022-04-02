@@ -39,6 +39,6 @@ HitResult Intersection::getHitResult(const Intersection& intersection, const Ray
         hitPoint,
         -ray.Direction(),
         normalV,
-        hitPoint + normalV * EPSILON
+        hitPoint + normalV * SHADOW_OFFSET
     };
 }
