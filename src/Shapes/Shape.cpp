@@ -13,3 +13,11 @@ void Shape::SetTransform(Matrix4 const& t) {
 void Shape::Intersect(const Ray& ray, std::vector<Intersection>& intersects) const {
     DoIntersect(ray.Trasnsform(this->InvTransform()), intersects);
 }
+
+Tuple Shape::NormalAt(const Tuple& point) const {
+    Tuple objectPos = this->Transform().Inverse() * point;
+    Tuple objectNormal = DoNormalAt(objectPos);
+    Tuple worldNormal = this->Transform().Inverse().Transpose() * objectNormal;
+    worldNormal[3] = 0.f;
+    return worldNormal.normalize();
+}

@@ -23,10 +23,6 @@ void Sphere::DoIntersect(const Ray& ray, std::vector<Intersection>& intersect) c
     intersect.push_back(Intersection(shared_from_this(),  (-1*b + sqrtf(delta))/(2*a)));
 }
 
-Tuple  Sphere::NormalAt(Tuple point) const {
-    Tuple objectPos = this->Transform().Inverse() * point;
-    Tuple objectNormal = objectPos - Tuple::Point(0.f, 0.f, 0.f);
-    Tuple worldNormal = this->Transform().Inverse().Transpose() * objectNormal;
-    worldNormal[3] = 0.f;
-    return worldNormal.normalize();
+Tuple  Sphere::DoNormalAt(const Tuple& point) const {
+    return point;
 }

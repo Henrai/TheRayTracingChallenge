@@ -6,6 +6,7 @@
 #include <Camera.h>
 #include <Renderer.h>
 #include <Shapes/Sphere.h>
+#include <Shapes/Plane.h>
 #include <Canvas.h>
 
 #include <cmath>
@@ -21,34 +22,31 @@ int main() {
         Color(1,1,1)));
     
     // set up floor
-    std::shared_ptr<Shape> floor = std::make_shared<Sphere>();
-    floor->SetTransform(matrix::Scale(10.f, 0.01f, 10.f));
+    std::shared_ptr<Shape> floor = std::make_shared<Plane>();
     floor->getMaterial().color = Color(1.f, 0.9f, 0.9f);
     floor->getMaterial().specular = .0f;
 
     // set up left wall
-    std::shared_ptr<Shape> leftWall = std::make_shared<Sphere>();
+    std::shared_ptr<Shape> leftWall = std::make_shared<Plane>();
     leftWall->SetTransform(
         matrix::Translation(0.f, 0.f, 5.f) 
       * matrix::RotationY(-M_PI_4) 
-      * matrix::RotationX(M_PI_2) 
-      * matrix::Scale(10.f, 0.01f, 10.f));
+      * matrix::RotationX(M_PI_2));
     leftWall->getMaterial() = floor->getMaterial();
-    //leftWall->getMaterial().color = Color::GREEN;
+    leftWall->getMaterial().color = Color::GREEN;
 
     // set up right wall
-    std::shared_ptr<Shape> rightWall = std::make_shared<Sphere>();
+    std::shared_ptr<Shape> rightWall = std::make_shared<Plane>();
     rightWall->SetTransform(
         matrix::Translation(0.f, 1.f, 5.f) 
       * matrix::RotationY(M_PI_4) 
-      * matrix::RotationX(M_PI_2) 
-      * matrix::Scale(10.f, 0.01f, 10.f));
+      * matrix::RotationX(M_PI_2));
     rightWall->getMaterial() = floor->getMaterial();
-    //rightWall->getMaterial().color = Color::RED;
+    rightWall->getMaterial().color = Color::RED;
 
     // set up middle ball
     std::shared_ptr<Shape> middleBall = std::make_shared<Sphere>();
-    middleBall->SetTransform(matrix::Translation(-0.5f, 1.4f, 0.5f));
+    middleBall->SetTransform(matrix::Translation(-0.5f, 1.f, 0.5f));
     middleBall->getMaterial().color = Color(0.1f, 1.f, 0.5f);
     middleBall->getMaterial().diffuse = .7f;
     middleBall->getMaterial().specular = .3f;
@@ -73,7 +71,7 @@ int main() {
 
     world->AddShape(floor);
     world->AddShape(leftWall);
-    world->AddShape(rightWall);
+   // world->AddShape(rightWall);
     world->AddShape(leftBall);
     world->AddShape(middleBall);
     world->AddShape(rightBall);

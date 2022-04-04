@@ -13,6 +13,7 @@ add_library(${LIBRARY}
     Ray.cpp
     Shapes/Shape.cpp
     Shapes/Sphere.cpp
+    Shapes/Plane.cpp
     Intersection.cpp
     World.cpp
     Camera.cpp
