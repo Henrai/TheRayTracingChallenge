@@ -48,7 +48,7 @@ int main() {
 
     // set up middle ball
     std::shared_ptr<Shape> middleBall = std::make_shared<Sphere>();
-    middleBall->SetTransform(matrix::Translation(-0.5f, 1.f, 0.5f));
+    middleBall->SetTransform(matrix::Translation(-0.5f, 1.4f, 0.5f));
     middleBall->getMaterial().color = Color(0.1f, 1.f, 0.5f);
     middleBall->getMaterial().diffuse = .7f;
     middleBall->getMaterial().specular = .3f;
