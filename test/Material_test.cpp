@@ -4,6 +4,7 @@
 #include <Tuple.h>
 #include <Shapes/Sphere.h>
 #include <Shapes/Shape.h>
+#include <Patterns/StripePattern.h>
 
 #include <gtest/gtest.h>
 #include <iostream>

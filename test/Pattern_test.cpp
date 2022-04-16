@@ -1,4 +1,7 @@
 #include <Patterns/StripePattern.h>
+#include <Patterns/GradientPattern.h>
+#include <Patterns/CheckerPattern.h>
+#include <Patterns/RingPattern.h>
 #include <Color.h>
 #include <Tuple.h>
 #include <Shapes/Shape.h>
@@ -59,4 +62,12 @@ TEST(PatternTest, PatternAndObjectTransform) {
     StripePattern sp(Color::WHITE, Color::BLACK);
     sp.transform = matrix::Translation(0.5, 0, 0);
     EXPECT_TRUE(sp.PatternAtShape(shape, Tuple::Point(2.5,0, 0)) == Color::WHITE); 
+}
+
+TEST(PatternTest, RingPattern) {
+    RingPattern rp(Color::WHITE, Color::BLACK);
+    EXPECT_TRUE(rp.PatternAt(Tuple::Point(0,0,0)) == Color::WHITE);
+    EXPECT_TRUE(rp.PatternAt(Tuple::Point(1,0,0)) == Color::BLACK);
+    EXPECT_TRUE(rp.PatternAt(Tuple::Point(0,0,1)) == Color::BLACK);
+    EXPECT_TRUE(rp.PatternAt(Tuple::Point(0.708,0,0.708)) == Color::BLACK); 
 }

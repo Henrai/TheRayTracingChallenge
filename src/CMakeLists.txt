@@ -15,6 +15,9 @@ add_library(${LIBRARY}
     Shapes/Sphere.cpp
     Shapes/Plane.cpp
     Patterns/Pattern.cpp
+    Patterns/CheckerPattern.cpp
+    Patterns/RingPattern.cpp
+    Patterns/GradientPattern.cpp
     Patterns/StripePattern.cpp
     Intersection.cpp
     World.cpp

@@ -9,6 +9,9 @@
 #include <Shapes/Plane.h>
 #include <Canvas.h>
 #include <Patterns/StripePattern.h>
+#include <Patterns/GradientPattern.h>
+#include <Patterns/CheckerPattern.h>
+#include <Patterns/RingPattern.h>
 
 #include <cmath>
 #include <memory>
@@ -26,6 +29,7 @@ int main() {
     std::shared_ptr<Shape> floor = std::make_shared<Plane>();
     floor->getMaterial().color = Color(1.f, 0.9f, 0.9f);
     floor->getMaterial().specular = .0f;
+    floor->getMaterial().pattern = std::make_shared<CheckerPattern>(Color::BLACK, Color(1.f, 0.9f, 0.9f));
 
     // set up left wall
     std::shared_ptr<Shape> leftWall = std::make_shared<Plane>();
@@ -51,6 +55,9 @@ int main() {
     middleBall->getMaterial().color = Color(0.1f, 1.f, 0.5f);
     middleBall->getMaterial().diffuse = .7f;
     middleBall->getMaterial().specular = .3f;
+    middleBall->getMaterial().pattern = std::make_shared<RingPattern>(Color(0.1f, 1.f, 0.5f),  Color(0.5f, 0.5f, 0.5f));
+    middleBall->getMaterial().pattern->transform = matrix::RotationY(-0.5) * matrix::RotationX(-0.3) * matrix::Scale(0.125,0.125,0.125);
+    
 
     // set up left ball 
     std::shared_ptr<Shape> leftBall = std::make_shared<Sphere>();
@@ -58,6 +65,9 @@ int main() {
     leftBall->getMaterial().color = Color(0.5f, 1.f, 0.1f);
     leftBall->getMaterial().diffuse = .7f;
     leftBall->getMaterial().specular = .3f;
+    leftBall->getMaterial().pattern = std::make_shared<GradientPattern>(Color::BLUE, Color::RED);
+    leftBall->getMaterial().pattern->transform = matrix::Translation(0.99,0,0) * matrix::Scale(2,2,2);
+    
 
     // set up right ball
     std::shared_ptr<Shape> rightBall = std::make_shared<Sphere>();
@@ -66,7 +76,7 @@ int main() {
     rightBall->getMaterial().diffuse = .7f;
     rightBall->getMaterial().specular = .3f;
     rightBall->getMaterial().pattern = std::make_shared<StripePattern>(Color(1.f, .8f, 0.1f), Color::WHITE);
-    rightBall->getMaterial().pattern->transform = matrix::Scale(0.2,0.2,0.2);
+    rightBall->getMaterial().pattern->transform = matrix::Scale(0.1,0.1,0.1);
 
     std::unique_ptr<World> world = std::make_unique<World>();
 
@@ -74,7 +84,7 @@ int main() {
 
     world->AddShape(floor);
     world->AddShape(leftWall);
-   // world->AddShape(rightWall);
+    //world->AddShape(rightWall);
     world->AddShape(leftBall);
     world->AddShape(middleBall);
     world->AddShape(rightBall);

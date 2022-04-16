@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Color.h"
-#include "Patterns/StripePattern.h"
+#include "Patterns/Pattern.h"
 
 #include <memory>
 
@@ -13,6 +13,6 @@ public:
     float diffuse {0.9f};
     float specular {0.9f};
     float shininess {200.0f};
-    std::shared_ptr<StripePattern> pattern;
+    std::shared_ptr<Pattern> pattern;
 
 };
