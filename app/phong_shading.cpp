@@ -51,7 +51,7 @@ int main() {
                 Tuple normal = hit.Object()->NormalAt(position);
                 Tuple eye = -r.Direction();
 
-                canvas[i][j] = lighting::PhongLinghting(hit.Object()->getMaterial(), light, position, eye, normal);
+                canvas[i][j] = lighting::PhongLinghting(hit.Object(), light, position, eye, normal);
             }
         }
     }

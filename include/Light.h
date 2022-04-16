@@ -3,12 +3,14 @@
 #include "Tuple.h"
 #include "Color.h"
 #include "Material.h"
+#include "Shapes/Shape.h"
 
 #include <algorithm>
 #include <cmath>
 
 #include <iostream>
 #include <iomanip>
+#include <memory>
 
 using namespace std;
 
@@ -20,11 +22,18 @@ struct PointLight
 };
 
 namespace lighting {
-    static Color PhongLinghting(Material material, PointLight light, Tuple point, Tuple eyeV, Tuple normalV, bool isShadowed = false){
+    static Color PhongLinghting(std::shared_ptr<const Shape> object, PointLight light, Tuple point, Tuple eyeV, Tuple normalV, bool isShadowed = false){
         if (isShadowed) {
             return Color::SHADOW;
         }
-        Color effectiveColor = material.color * light.intensity;
+        Material material = object->getMaterial();
+        Color matrialColor = material.color;
+
+        if (object != nullptr && material.pattern != nullptr) {
+            matrialColor = material.pattern->PatternAtShape(object, point);            
+        }
+
+        Color effectiveColor = matrialColor * light.intensity;
         Tuple lightV = (light.position - point).normalize();
         Color ambient = effectiveColor * material.ambient;
 

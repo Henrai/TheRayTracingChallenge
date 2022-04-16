@@ -19,7 +19,7 @@ Color World::ShadeHit(const HitResult &hit) const
     for (auto i : m_lights)
     {
         result = result + lighting::PhongLinghting(
-             hit.shape->getMaterial(), 
+             hit.shape, 
              *i, // light
              hit.overPoint, 
              hit.eyev, 

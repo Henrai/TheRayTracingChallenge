@@ -8,6 +8,7 @@
 #include <Shapes/Sphere.h>
 #include <Shapes/Plane.h>
 #include <Canvas.h>
+#include <Patterns/StripePattern.h>
 
 #include <cmath>
 #include <memory>
@@ -33,7 +34,7 @@ int main() {
       * matrix::RotationY(-M_PI_4) 
       * matrix::RotationX(M_PI_2));
     leftWall->getMaterial() = floor->getMaterial();
-    leftWall->getMaterial().color = Color::GREEN;
+    leftWall->getMaterial().pattern =  std::make_shared<StripePattern>(Color::BLUE, Color::WHITE);
 
     // set up right wall
     std::shared_ptr<Shape> rightWall = std::make_shared<Plane>();
@@ -64,6 +65,8 @@ int main() {
     rightBall->getMaterial().color = Color(1.f, .8f, 0.1f);
     rightBall->getMaterial().diffuse = .7f;
     rightBall->getMaterial().specular = .3f;
+    rightBall->getMaterial().pattern = std::make_shared<StripePattern>(Color(1.f, .8f, 0.1f), Color::WHITE);
+    rightBall->getMaterial().pattern->transform = matrix::Scale(0.2,0.2,0.2);
 
     std::unique_ptr<World> world = std::make_unique<World>();
 

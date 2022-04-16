@@ -14,6 +14,8 @@ add_library(${LIBRARY}
     Shapes/Shape.cpp
     Shapes/Sphere.cpp
     Shapes/Plane.cpp
+    Patterns/Pattern.cpp
+    Patterns/StripePattern.cpp
     Intersection.cpp
     World.cpp
     Camera.cpp
