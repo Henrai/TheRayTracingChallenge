@@ -76,7 +76,7 @@ int main() {
     rightBall->getMaterial().diffuse = .7f;
     rightBall->getMaterial().specular = .3f;
     rightBall->getMaterial().pattern = std::make_shared<StripePattern>(Color(1.f, .8f, 0.1f), Color::WHITE);
-    rightBall->getMaterial().pattern->transform = matrix::Scale(0.1,0.1,0.1);
+    rightBall->getMaterial().pattern->transform = matrix::Scale(0.2,0.2,0.2);
 
     std::unique_ptr<World> world = std::make_unique<World>();
 
