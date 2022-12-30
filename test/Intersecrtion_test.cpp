@@ -2,12 +2,13 @@
 #include <Ray.h>
 #include <Intersection.h>
 #include <Shapes/Sphere.h>
+#include <Shapes/Plane.h>
 #include <MathUtil.h>
 
 #include <gtest/gtest.h>
-#include<memory>
-#include<vector>
-
+#include <memory>
+#include <vector>
+#include <cmath>
 #include <iostream>
 
 using namespace std;
@@ -100,4 +101,13 @@ TEST(IntersectTest, HitOffset) {
     cout << hit.overPoint << endl << hit.point << endl;
     EXPECT_TRUE(hit.overPoint[2] < EPSILON/2);
     EXPECT_TRUE(hit.point[2] > hit.overPoint[2]);
+}
+
+TEST(IntersectTest, reflectionVector) {
+    std::shared_ptr<Plane> shape = std::make_shared<Plane>();
+    Ray r(Tuple::Point(0, 1, -1), Tuple::Vector(0, -sqrt(2)/2, sqrt(2)/2));
+    Intersection i(shape, sqrt(2));
+    HitResult hit = Intersection::getHitResult(i, r);
+    cout << hit.reflectv << endl;
+    EXPECT_TRUE(hit.reflectv == Tuple::Vector(0, sqrt(2)/2, sqrt(2)/2));
 }

@@ -24,6 +24,7 @@ public:
             impl().getData()[2] + t.getData()[2], 
             impl().getData()[3] + t.getData()[3]);
     }
+
     T operator-(const T& t) const {
         return T(
             impl().getData()[0] - t.getData()[0], 

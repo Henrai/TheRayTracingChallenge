@@ -29,6 +29,7 @@ int main() {
     std::shared_ptr<Shape> floor = std::make_shared<Plane>();
     floor->getMaterial().color = Color(1.f, 0.9f, 0.9f);
     floor->getMaterial().specular = .0f;
+    floor->getMaterial().reflective = 0.2f;
     floor->getMaterial().pattern = std::make_shared<CheckerPattern>(Color::BLACK, Color(1.f, 0.9f, 0.9f));
 
     // set up left wall
@@ -55,6 +56,7 @@ int main() {
     middleBall->getMaterial().color = Color(0.1f, 1.f, 0.5f);
     middleBall->getMaterial().diffuse = .7f;
     middleBall->getMaterial().specular = .3f;
+    middleBall->getMaterial().reflective = .1f;
     middleBall->getMaterial().pattern = std::make_shared<RingPattern>(Color(0.1f, 1.f, 0.5f),  Color(0.5f, 0.5f, 0.5f));
     middleBall->getMaterial().pattern->transform = matrix::RotationY(-0.5) * matrix::RotationX(-0.3) * matrix::Scale(0.125,0.125,0.125);
     
@@ -83,7 +85,7 @@ int main() {
     world->AddLight(light);
 
     world->AddShape(floor);
-    world->AddShape(leftWall);
+    //world->AddShape(leftWall);
     //world->AddShape(rightWall);
     world->AddShape(leftBall);
     world->AddShape(middleBall);

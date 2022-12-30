@@ -13,6 +13,7 @@ public:
     float diffuse {0.9f};
     float specular {0.9f};
     float shininess {200.0f};
+    float reflective {0.0f};
     std::shared_ptr<Pattern> pattern;
 
 };

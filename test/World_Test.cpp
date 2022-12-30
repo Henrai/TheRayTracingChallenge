@@ -4,6 +4,7 @@
 #include <Shapes/Sphere.h>
 #include <Light.h>
 #include <Material.h>
+#include <Color.h>
 
 #include <gtest/gtest.h>
 #include <cmath>
@@ -111,4 +112,68 @@ TEST(WorldTest, NoShadowObjectBehindPoint) {
     auto light = world->getLights()[0];
     Tuple point = Tuple::Point(-2, 2, -2);
     EXPECT_FALSE(world->IsShadowed(point, light));
+}
+
+TEST(WorldTest, noreflectiveSurface) {
+    std::unique_ptr<World> world = defaultNoneReflectWorld();
+    Ray r(Tuple::Point(0,0,0), Tuple::Vector(0,0,1));
+    auto s = world->getObjects()[1];
+    Intersection i(s, 1.f);
+    HitResult hit = Intersection::getHitResult(i,r);
+    Color reflect_color = world->reflectedColor(hit);
+
+    EXPECT_TRUE(reflect_color == Color(0.f, 0.f, 0.f));
+}
+
+TEST(WorldTest, reflectedColorForReflectedM) {
+    std::unique_ptr<World> world = defaultNoneReflectWorld();
+
+    std::shared_ptr<Shape> shape3 = std::make_shared<Plane>();
+    shape3->getMaterial().reflective = 0.5;
+    shape3->SetTransform(matrix::Translation(0,-1,0));
+    world->AddShape(shape3);
+
+    Ray r(Tuple::Point(0, 0, -3), Tuple::Vector(0, - sqrt(2.f)/2.f, sqrt(2.f)/2.0f));
+    Intersection i(shape3, sqrt(2.f));
+    HitResult hit = Intersection::getHitResult(i,r);
+    Color reflect_color = world->reflectedColor(hit);
+    cout << reflect_color << endl;
+    EXPECT_TRUE(reflect_color == Color(0.190491f, 0.238114f, 0.142868f)); 
+}
+
+TEST(WorldTest, shadeHitWithReflect) {
+    std::unique_ptr<World> world = defaultNoneReflectWorld();
+
+    std::shared_ptr<Shape> shape3 = std::make_shared<Plane>();
+    shape3->getMaterial().reflective = 0.5;
+    shape3->SetTransform(matrix::Translation(0,-1,0));
+    world->AddShape(shape3);
+
+    Ray r(Tuple::Point(0, 0, -3), Tuple::Vector(0, - sqrt(2.f)/2.f, sqrt(2.f)/2.0f));
+    Intersection i(shape3, sqrt(2.f));
+    HitResult hit = Intersection::getHitResult(i,r);
+    Color shade = world->ShadeHit(hit);
+    cout << shade << endl;
+    EXPECT_TRUE(shade == Color(0.876886f, 0.924509f, 0.829263f)); 
+}
+
+TEST(WorldTest, mutuallyReflect) {
+    std::unique_ptr<World> world = std::make_unique<World>();
+    std::shared_ptr<PointLight> light = std::make_shared<PointLight>(
+       PointLight(Tuple::Point(0, 0, 0), Color(1,1,1)));
+    world->AddLight(light);
+
+    std::shared_ptr<Shape> shape1 = std::make_shared<Sphere>();
+    shape1->getMaterial().reflective = 1.f;
+    shape1->SetTransform(matrix::Translation(0, -1, 0));
+    std::shared_ptr<Shape> shape2 = std::make_shared<Sphere>();
+    shape2->getMaterial().reflective = 1.f;
+    shape2->SetTransform(matrix::Translation(0, 1, 0));
+
+    world->AddShape(shape1);
+    world->AddShape(shape2);
+
+    Ray r(Tuple::Point(0, 0, 0), Tuple::Vector(0, 1, 0));
+
+    world->ColorAt(r);
 }

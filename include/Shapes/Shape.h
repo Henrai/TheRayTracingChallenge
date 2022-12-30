@@ -28,7 +28,7 @@ public:
     const Matrix4& InvTransform() const { return m_invTransform; }
     const Material& getMaterial() const { return m_material;}
     Material& getMaterial(){ return m_material;}
-    
+
     void Intersect(const Ray& ray, std::vector<Intersection>& intersect) const;
     Tuple NormalAt(const Tuple& point) const;
     

@@ -8,6 +8,7 @@
 
 class Shape;
 class Ray;
+class Color;
 
 struct HitResult {
     bool isInside;
@@ -16,6 +17,7 @@ struct HitResult {
     Tuple point;
     Tuple eyev;
     Tuple normalv;
+    Tuple reflectv;
     Tuple overPoint;
 };
 
@@ -36,7 +38,6 @@ public:
     bool operator<(const Intersection& other) const;
 
     static HitResult getHitResult(const Intersection& intersection, const Ray& ray);
-    
     static Intersection Hit(std::vector<Intersection>& xs);
 };
 

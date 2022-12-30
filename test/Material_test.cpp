@@ -24,6 +24,7 @@ TEST(MaterialTest, DefaultMaterial) {
     EXPECT_FLOAT_EQ(m.diffuse, 0.9f);
     EXPECT_FLOAT_EQ(m.specular, 0.9f);
     EXPECT_FLOAT_EQ(m.shininess, 200.0f);
+    EXPECT_FLOAT_EQ(m.reflective, 0.0f);
 }
 
 TEST(MaterialTest, EyeBetweenLS) {

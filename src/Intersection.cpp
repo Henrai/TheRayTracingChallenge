@@ -1,6 +1,5 @@
 #include <Intersection.h>
 #include <Ray.h>
-
 #include <vector>
 
 bool Intersection::operator==(const Intersection& other) const {
@@ -32,6 +31,7 @@ HitResult Intersection::getHitResult(const Intersection& intersection, const Ray
     Tuple normalV = intersection.Object()->NormalAt(hitPoint);
     bool isInside = normalV.Dot(-ray.Direction()) < 0;
     if(isInside) normalV = -normalV;
+    Tuple reflectV = ray.Direction().Reflect(normalV);
     return {
         isInside,
         intersection.Distance(),
@@ -39,6 +39,7 @@ HitResult Intersection::getHitResult(const Intersection& intersection, const Ray
         hitPoint,
         -ray.Direction(),
         normalV,
+        reflectV,
         hitPoint + normalV * SHADOW_OFFSET
     };
 }

@@ -6,10 +6,8 @@
 
 #include <vector>
 
-#include <iostream>
-using namespace std;
 
-Color World::ShadeHit(const HitResult &hit) const
+Color World::ShadeHit(const HitResult &hit, int remaining) const
 {
     Color result = Color::BLACK;
     if (hit.shape == nullptr)
@@ -26,15 +24,16 @@ Color World::ShadeHit(const HitResult &hit) const
              hit.normalv, 
              IsShadowed(hit.overPoint, i));
     }
-    return result;
+    
+    return result + reflectedColor(hit, remaining);
 }
 
-Color World::ColorAt(const Ray &ray) const
+Color World::ColorAt(const Ray &ray, int remaining) const
 {
     std::vector<Intersection> xs;
     this->Intersect(ray, xs);
     HitResult hit = Intersection::getHitResult(Intersection::Hit(xs), ray);
-    return this->ShadeHit(hit);
+    return this->ShadeHit(hit, remaining);
 }
 
 bool World::IsShadowed(const Tuple &point, std::shared_ptr<const PointLight> light) const
@@ -48,10 +47,18 @@ bool World::IsShadowed(const Tuple &point, std::shared_ptr<const PointLight> lig
     std::vector<Intersection> xs;
     this->Intersect(r, xs);
     Intersection hit = Intersection::Hit(xs);
-    //cout<<hit.Distance();
     if (hit.Object() != nullptr && hit.Distance() >= 0.00001 && hit.Distance() < distance)
     {
         return true;
     }
     return false; 
+}
+
+Color World::reflectedColor(HitResult hitResult, int remaining) const {
+    if(hitResult.shape->getMaterial().reflective < EPSILON || remaining <= 0) {
+        return Color::BLACK;
+    }
+    Ray reflectRay(hitResult.overPoint, hitResult.reflectv);
+    Color color = ColorAt(reflectRay, remaining - 1);
+    return color * hitResult.shape->getMaterial().reflective;
 }
