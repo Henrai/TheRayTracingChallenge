@@ -12,6 +12,8 @@
 
 #include <memory>
 
+#include "TestUtil.h"
+
 using namespace std;
 
 std::shared_ptr<Shape> DefaultShape() {
@@ -118,4 +120,11 @@ TEST(MaterialTest, lightwithPattern) {
     Color c2 = lighting::PhongLinghting(shape, light, Tuple::Point(1.1f, 0.f, 0.f), eyeV, normalV);
     EXPECT_TRUE(c1 == Color::WHITE);
     EXPECT_TRUE(c2 == Color::BLACK);
+}
+
+TEST(MaterialTest, MaterialForGlassSphere) {
+    std::unique_ptr<Shape> shape = glass_sphere();
+    EXPECT_FLOAT_EQ(shape->getMaterial().transparency, 1.f);
+    EXPECT_FLOAT_EQ(shape->getMaterial().refraction_index, 1.5f);
+    EXPECT_TRUE(shape->Transform() == Matrix<4>::Identity());
 }

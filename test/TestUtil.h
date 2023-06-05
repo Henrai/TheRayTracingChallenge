@@ -7,6 +7,20 @@
 #include <Light.h>
 #include <Color.h>
 
+static std::unique_ptr<Shape> glass_sphere() {
+    std::unique_ptr<Shape> shape = std::make_unique<Sphere>();
+    shape->getMaterial().transparency = 1.0f;
+    shape->getMaterial().refraction_index = 1.5f;
+    return shape;
+}
+
+static std::shared_ptr<Shape> shared_glass_sphere() {
+    std::shared_ptr<Shape> shape = std::make_shared<Sphere>();
+    shape->getMaterial().transparency = 1.0f;
+    shape->getMaterial().refraction_index = 1.5f;
+    return shape;
+}
+
 static std::unique_ptr<World> defaultWorld() {
     std::unique_ptr<World> world = std::make_unique<World>();
 

@@ -47,5 +47,7 @@ public:
     Color ShadeHit(const HitResult& hit, int remaining = 5) const;
     Color ColorAt(const Ray& ray, int remaining = 5) const;
     Color reflectedColor(HitResult hitResult, int remaining = 5) const;
+    Color refracted_color(HitResult hitResult, int remaining = 5) const;
     bool IsShadowed(const Tuple& point, std::shared_ptr<const PointLight> light) const;
+
 };

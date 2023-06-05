@@ -23,9 +23,8 @@ struct PointLight
 
 namespace lighting {
     static Color PhongLinghting(std::shared_ptr<const Shape> object, PointLight light, Tuple point, Tuple eyeV, Tuple normalV, bool isShadowed = false){
-        if (isShadowed) {
-            return Color::SHADOW;
-        }
+       
+       Color ambient, diffuse, specular;
         Material material = object->getMaterial();
         Color matrialColor = material.color;
 
@@ -35,13 +34,19 @@ namespace lighting {
 
         Color effectiveColor = matrialColor * light.intensity;
         Tuple lightV = (light.position - point).normalize();
-        Color ambient = effectiveColor * material.ambient;
+         ambient = effectiveColor * material.ambient;
 
         float lightDotNormal = lightV.Dot(normalV);
-        Color diffuse = effectiveColor * material.diffuse * std::clamp( lightDotNormal, 0.0f, 1.0f);
-        Tuple reflectV = -lightV.Reflect(normalV); 
-        float reflectDotEye = std::clamp(reflectV.Dot(eyeV) , 0.0f, 1.0f);
-        Color specular = light.intensity * material.specular * pow(reflectDotEye, material.shininess) ;
+
+        if (lightDotNormal < 0.0 || isShadowed) {
+            diffuse  = Color(0,0,0);
+            specular = Color(0,0,0);
+        } else {
+            diffuse = effectiveColor * material.diffuse * std::clamp( lightDotNormal, 0.0f, 1.0f);
+            Tuple reflectV = -lightV.Reflect(normalV); 
+            float reflectDotEye = std::clamp(reflectV.Dot(eyeV) , 0.0f, 1.0f);
+            specular = light.intensity * material.specular * pow(reflectDotEye, material.shininess) ; 
+        }
         return ambient + diffuse + specular;
     }
 } // lighting

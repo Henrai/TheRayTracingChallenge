@@ -14,6 +14,9 @@ public:
     float specular {0.9f};
     float shininess {200.0f};
     float reflective {0.0f};
+    float transparency {0.f};
+    float refraction_index {1.f};
+
     std::shared_ptr<Pattern> pattern;
 
 };

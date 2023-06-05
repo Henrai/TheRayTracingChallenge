@@ -1,3 +1,5 @@
+#include "TestUtil.h"
+#include "Transformation.h"
 #include <Tuple.h>
 #include <Ray.h>
 #include <Intersection.h>
@@ -10,6 +12,7 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
+#include <list>
 
 using namespace std;
 
@@ -110,4 +113,49 @@ TEST(IntersectTest, reflectionVector) {
     HitResult hit = Intersection::getHitResult(i, r);
     cout << hit.reflectv << endl;
     EXPECT_TRUE(hit.reflectv == Tuple::Vector(0, sqrt(2)/2, sqrt(2)/2));
+}
+
+TEST(IntersectTest, determingRefraction) {
+    std::shared_ptr<Shape> A = std::make_unique<Sphere>();
+    A->SetTransform(matrix::Scale(2, 2, 2));
+    A->getMaterial().refraction_index = 1.5;
+
+    std::shared_ptr<Shape> B = std::make_unique<Sphere>();
+    B->SetTransform(matrix::Translation(0, 0, -0.25));
+    B->getMaterial().refraction_index = 2.0f;
+
+    std::shared_ptr<Shape> C = std::make_unique<Sphere>();
+    C->SetTransform(matrix::Translation(0, 0, 0.25));
+    C->getMaterial().refraction_index = 2.5;
+
+    std::vector<Intersection> xs = {};
+    xs.push_back({A, 2});
+    xs.push_back({B, 2.75});
+    xs.push_back({C, 3.25});
+    xs.push_back({B, 4.75});
+    xs.push_back({C, 5.25});
+    xs.push_back({A, 6});
+
+    std::vector<std::pair<float, float>> result = {
+        {1.0,1.5}, {1.5, 2.0}, {2.0, 2.5}, {2.5, 2.5}, {2.5, 1.5}, {1.5, 1.0}
+    };
+    Ray r(Tuple::Point(0, 0, -4), Tuple::Vector(0, 0, 1));
+
+    for (int i = 0; i < result.size(); i++) {
+        HitResult hit = Intersection::getHitResult(xs[0], r, xs);
+        EXPECT_DOUBLE_EQ(result[0].first , hit.n1);
+        EXPECT_DOUBLE_EQ(result[0].second, hit.n2);
+    }
+    
+}
+
+TEST(IntersectTesr, computeUnderPoint) {
+   Ray r(Tuple::Point(0, 0, -5), Tuple::Vector(0, 0, 1));
+   auto shape = shared_glass_sphere();
+   shape->SetTransform(matrix::Translation(0, 0, 1));
+   std::vector<Intersection> xs = {{shape, 5}};
+   HitResult hit = Intersection::getHitResult(xs[0], r, xs);
+
+   EXPECT_LT(SHADOW_OFFSET/2, hit.underPoint[2]);
+   EXPECT_LT(hit.point[2], hit.underPoint[2]);
 }

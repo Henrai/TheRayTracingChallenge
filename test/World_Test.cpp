@@ -5,12 +5,15 @@
 #include <Light.h>
 #include <Material.h>
 #include <Color.h>
+#include <Patterns/StripePattern.h>
 
 #include <gtest/gtest.h>
 #include <cmath>
 
 #include <memory>
 
+#include "Intersection.h"
+#include "Patterns/Pattern.h"
 #include "TestUtil.h"
 
 #include <iostream>
@@ -176,4 +179,95 @@ TEST(WorldTest, mutuallyReflect) {
     Ray r(Tuple::Point(0, 0, 0), Tuple::Vector(0, 1, 0));
 
     world->ColorAt(r);
+}
+
+TEST(WorldTest, refractColorAtOpaqueSurface) {
+    std::unique_ptr<World> world = defaultWorld();
+    auto shape = world->getObjects()[0];
+    Ray r(Tuple::Point(0,0, -5), Tuple::Vector(0,0,1));
+    std::vector<Intersection> xs {{shape, 4}, {shape, 6}};
+    HitResult hit = Intersection::getHitResult(xs[0], r, xs);
+    Color c = world->refracted_color(hit);
+    EXPECT_TRUE(c == Color(0, 0, 0));
+}
+
+TEST(WorldTest, refractColorWithMaxDepth) {
+   std::unique_ptr<World> world = std::make_unique<World>();
+
+   std::shared_ptr<PointLight> light = std::make_shared<PointLight>(
+       PointLight(Tuple::Point(-10, 10,-10), 
+        Color(1,1,1)));
+    world->AddLight(light);
+
+    std::shared_ptr<Shape> shape = std::make_shared<Sphere>();
+    shape->getMaterial().color = Color(0.8f, 1.0f, 0.6f);
+    shape->getMaterial().diffuse = 0.7f;
+    shape->getMaterial().specular = 0.2f;
+    shape->getMaterial().transparency = 1.0f;
+    shape->getMaterial().refraction_index = 1.5f;
+
+    world->AddShape(shape);
+
+    Ray r(Tuple::Point(0,0, -5), Tuple::Vector(0,0,1));
+    std::vector<Intersection> xs {{shape, 4}, {shape, 6}};
+    HitResult hit = Intersection::getHitResult(xs[0], r, xs);
+    Color c = world->refracted_color(hit, 0);
+    EXPECT_TRUE(c == Color(0, 0, 0));
+}
+
+TEST(WorldTest, totalInternalReflection) {
+    std::unique_ptr<World> world = std::make_unique<World>();
+
+   std::shared_ptr<PointLight> light = std::make_shared<PointLight>(
+       PointLight(Tuple::Point(-10, 10,-10), 
+        Color(1,1,1)));
+    world->AddLight(light);
+
+    std::shared_ptr<Shape> shape = std::make_shared<Sphere>();
+    shape->getMaterial().color = Color(0.8f, 1.0f, 0.6f);
+    shape->getMaterial().diffuse = 0.7f;
+    shape->getMaterial().specular = 0.2f;
+    shape->getMaterial().transparency = 1.0f;
+    shape->getMaterial().refraction_index = 1.5f;
+
+    world->AddShape(shape);
+
+    Ray r(Tuple::Point(0,0, 0.7071068), Tuple::Vector(0,1,0));
+    std::vector<Intersection> xs {{shape, -0.7071068}, {shape, 0.7071068}};
+    HitResult hit = Intersection::getHitResult(xs[1], r, xs);
+    Color c = world->refracted_color(hit, 5);
+    EXPECT_TRUE(c == Color(0, 0, 0));
+}
+
+
+TEST(WorldTest, computeRefractionColor) {
+    std::unique_ptr<World> world = std::make_unique<World>();
+
+   std::shared_ptr<PointLight> light = std::make_shared<PointLight>(
+       PointLight(Tuple::Point(0, 0, 0),  Color(1,1,1)));
+    world->AddLight(light);
+
+    std::shared_ptr<Shape> A = std::make_shared<Sphere>();
+    A->getMaterial().color = Color(0.8f, 1.0f, 0.6f);
+    A->getMaterial().diffuse = 0.7f;
+    A->getMaterial().specular = 0.2f;
+    A->getMaterial().ambient = 1.0f;
+    A->getMaterial().pattern = make_shared<StripePattern>(Color::WHITE, Color::BLACK);
+
+    std::shared_ptr<Shape> B = std::make_shared<Sphere>();
+    B->getMaterial().ambient = 1.0f;
+    B->getMaterial().transparency = 1.0f;
+    B->getMaterial().refraction_index = 1.5f;
+    B->SetTransform(matrix::Scale(0.5f, 0.5f, 0.5f));
+
+    world->AddShape(A); world->AddShape(B);
+    
+
+    Ray r(Tuple::Point(0,0, .1), Tuple::Vector(0,1,0));
+    std::vector<Intersection> xs {{A, -0.9899}, {B, -.4899}, {B, .4899}, {A, 9899}};
+    HitResult hit = Intersection::getHitResult(xs[2], r, xs);
+    
+    Color c = world->refracted_color(hit, 5);
+    cout <<"okita " << c << endl;
+    EXPECT_TRUE(c == Color(0, 0.99888, 0.04725));
 }

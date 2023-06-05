@@ -56,7 +56,7 @@ int main() {
     middleBall->getMaterial().color = Color(0.1f, 1.f, 0.5f);
     middleBall->getMaterial().diffuse = .7f;
     middleBall->getMaterial().specular = .3f;
-    middleBall->getMaterial().reflective = .1f;
+   //middleBall->getMaterial().reflective = .1f;
     middleBall->getMaterial().pattern = std::make_shared<RingPattern>(Color(0.1f, 1.f, 0.5f),  Color(0.5f, 0.5f, 0.5f));
     middleBall->getMaterial().pattern->transform = matrix::RotationY(-0.5) * matrix::RotationX(-0.3) * matrix::Scale(0.125,0.125,0.125);
     

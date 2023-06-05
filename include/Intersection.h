@@ -3,22 +3,26 @@
 #include "Tuple.h"
 
 #include<memory>
+#include<vector>
 
 #define SHADOW_OFFSET 0.001
 
 class Shape;
 class Ray;
-class Color;
+class Color; 
 
 struct HitResult {
     bool isInside;
     float hitTime;
+    float n1;
+    float n2;
     std::shared_ptr<const Shape> shape;
     Tuple point;
     Tuple eyev;
     Tuple normalv;
     Tuple reflectv;
     Tuple overPoint;
+    Tuple underPoint;
 };
 
 class Intersection
@@ -37,7 +41,7 @@ public:
     bool operator==(const Intersection& other) const;
     bool operator<(const Intersection& other) const;
 
-    static HitResult getHitResult(const Intersection& intersection, const Ray& ray);
+    static HitResult getHitResult(const Intersection& intersection, const Ray& ray, std::vector<Intersection> xs = {});
     static Intersection Hit(std::vector<Intersection>& xs);
 };
 
