@@ -28,7 +28,7 @@ Color World::ShadeHit(const HitResult &hit, int remaining) const
              IsShadowed(hit.overPoint, i));
     }
     
-    return result + reflectedColor(hit, remaining); //+ refracted_color(hit, remaining);
+    return result + reflectedColor(hit, remaining) + refracted_color(hit, remaining);
 }
 
 Color World::ColorAt(const Ray &ray, int remaining) const
@@ -70,15 +70,13 @@ Color World::refracted_color(HitResult hitResult, int remaining) const {
     float n_ratio = hitResult.n1 / hitResult.n2;
     float cos_i = hitResult.eyev.Dot(hitResult.normalv);
     float sin2_t = n_ratio * n_ratio * (1 - cos_i*cos_i);
-    if (remaining == 0 || sin2_t > 1 || hitResult.shape->getMaterial().transparency == 0) {
-        //cout << remaining << " " << sin2_t << " " <<hitResult.shape->getMaterial().transparency<< endl;
+    if (remaining == 0 || sin2_t > 1.0 || hitResult.shape->getMaterial().transparency == 0) {
         return Color(0, 0, 0);
     } else {
-        //cout << "okita" << "!!" << endl;
         float cos_t = sqrt(1 - sin2_t);
         auto dir = hitResult.normalv * (n_ratio * cos_i - cos_t) - hitResult.eyev * n_ratio;
         auto refract_ray = Ray(hitResult.underPoint, dir);
-
         return ColorAt(refract_ray, remaining - 1) * hitResult.shape->getMaterial().transparency;
+
     }
 }

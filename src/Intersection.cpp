@@ -17,7 +17,7 @@ bool Intersection::operator<(const Intersection& other) const {
 
 Intersection Intersection::Hit(std::vector<Intersection>& xs)
 {
-    sort(xs.begin(), xs.end());
+   
     for (auto const& i : xs)
     {
         if (i.Distance() >= 0.f)

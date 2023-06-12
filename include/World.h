@@ -42,6 +42,7 @@ public:
         for(auto i : m_objects) {
             i->Intersect(ray, intersects);
         }
+         sort(intersects.begin(), intersects.end());
     } 
 
     Color ShadeHit(const HitResult& hit, int remaining = 5) const;

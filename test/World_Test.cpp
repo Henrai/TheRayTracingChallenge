@@ -5,7 +5,7 @@
 #include <Light.h>
 #include <Material.h>
 #include <Color.h>
-#include <Patterns/StripePattern.h>
+#include <Patterns/TestPattern.h>
 
 #include <gtest/gtest.h>
 #include <cmath>
@@ -13,7 +13,7 @@
 #include <memory>
 
 #include "Intersection.h"
-#include "Patterns/Pattern.h"
+#include "Shapes/Plane.h"
 #include "TestUtil.h"
 
 #include <iostream>
@@ -89,7 +89,7 @@ TEST(WorldTest, RayHit) {
     EXPECT_TRUE(c == Color(0.380637f, 0.475797f, 0.285478f));
 }
 
-TEST(WorldTest, NoShadowAndNoHit) {
+TEST(WorldTest, dwNoShadowAndNoHit) {
     std::unique_ptr<World> world = defaultWorld();
     auto light = world->getLights()[0];
     Tuple point = Tuple::Point(0,10,0);
@@ -252,7 +252,7 @@ TEST(WorldTest, computeRefractionColor) {
     A->getMaterial().diffuse = 0.7f;
     A->getMaterial().specular = 0.2f;
     A->getMaterial().ambient = 1.0f;
-    A->getMaterial().pattern = make_shared<StripePattern>(Color::WHITE, Color::BLACK);
+    A->getMaterial().pattern = make_shared<TestPattern>();
 
     std::shared_ptr<Shape> B = std::make_shared<Sphere>();
     B->getMaterial().ambient = 1.0f;
@@ -264,10 +264,35 @@ TEST(WorldTest, computeRefractionColor) {
     
 
     Ray r(Tuple::Point(0,0, .1), Tuple::Vector(0,1,0));
-    std::vector<Intersection> xs {{A, -0.9899}, {B, -.4899}, {B, .4899}, {A, 9899}};
+    std::vector<Intersection> xs {{A, -0.9899}, {B, -.4899}, {B, .4899}, {A, .9899}};
     HitResult hit = Intersection::getHitResult(xs[2], r, xs);
     
     Color c = world->refracted_color(hit, 5);
     cout <<"okita " << c << endl;
-    EXPECT_TRUE(c == Color(0, 0.99888, 0.04725));
+    EXPECT_TRUE(c == Color(0, 0.99787, 0.047472));
+}
+
+TEST(WorldTest, shadehitWithRefraction) {
+    std::unique_ptr<World> world = defaultWorld();
+    auto floor = std::make_shared<Plane>();
+    floor->SetTransform(matrix::Translation(0,-1,0));
+    floor->getMaterial().transparency = .5f;
+    floor->getMaterial().refraction_index = 1.5;
+    world->AddShape(floor);
+
+    auto ball = make_shared<Sphere>();
+    ball->getMaterial().color = Color(1,0,0);
+    ball->getMaterial().ambient = 0.5f;
+    ball->SetTransform(matrix::Translation(0, -3.5, -.5));
+    world->AddShape(ball);
+    
+
+    Ray r(Tuple::Point(0,0, -3), Tuple::Vector(0, -.7071068, .7071068));
+    std::vector<Intersection> xs {{floor, 1.41421356}};
+    HitResult hit = Intersection::getHitResult(xs[0], r, xs);
+
+    Color c = world->ShadeHit( hit, 5);
+    EXPECT_TRUE(c == Color(0.936395, 0.686395, 0.686395));
+
+    
 }

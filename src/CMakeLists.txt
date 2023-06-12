@@ -19,10 +19,12 @@ add_library(${LIBRARY}
     Patterns/RingPattern.cpp
     Patterns/GradientPattern.cpp
     Patterns/StripePattern.cpp
+    Patterns/TestPattern.cpp
     Intersection.cpp
     World.cpp
     Camera.cpp
     Renderer.cpp
+
     ${HEADER_LIST})
 target_link_libraries(${LIBRARY} PRIVATE TBB::tbb)
 target_include_directories(${LIBRARY} PUBLIC ../include)
