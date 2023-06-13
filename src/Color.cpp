@@ -1,12 +1,12 @@
 #include "Color.h"
 
-float Color::R() const {
+double Color::R() const {
     return m_data[0];
 }
-float Color::G() const {
+double Color::G() const {
     return m_data[1];
 }
-float Color::B() const {
+double Color::B() const {
     return m_data[2];
 }
 

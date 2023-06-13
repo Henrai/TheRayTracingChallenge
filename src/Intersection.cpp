@@ -7,6 +7,14 @@
 
 using namespace std;
 
+void HitResult::toString() const {
+    cout << "n1: " << n1 << endl;
+    cout << "n2: " << n2 << endl;
+    cout << "eyeV: " << eyev << endl;
+    cout << "normalV: " << normalv << endl;
+    cout << "under point: " << underPoint << endl;
+}
+
 bool Intersection::operator==(const Intersection& other) const {
     return   m_hitTime == other.m_hitTime && m_shape == other.m_shape;
 }
@@ -34,7 +42,7 @@ HitResult Intersection::getHitResult(const Intersection& intersection, const Ray
         return res;
     }
 
-    float n1, n2;
+    double n1, n2;
     n1 = n2 = 1.0f;
 
     if (!xs.empty()) {
@@ -68,15 +76,15 @@ HitResult Intersection::getHitResult(const Intersection& intersection, const Ray
     Tuple reflectV = ray.Direction().Reflect(normalV);
     return {
         isInside,
-        intersection.Distance(),
+        intersection.Distance(),// hit time
         n1,
         n2,
-        intersection.Object(),
+        intersection.Object(), //shape
         hitPoint,
-        -ray.Direction(),
-        normalV,
+        -ray.Direction(), // eyev
+        normalV,  
         reflectV,
-        hitPoint + normalV * SHADOW_OFFSET,
-        hitPoint - normalV * SHADOW_OFFSET
+        hitPoint + normalV * SHADOW_OFFSET, // over point
+        hitPoint - normalV * SHADOW_OFFSET  // under point
     };
 }

@@ -17,11 +17,11 @@ bool Tuple::IsVector() const{
 
 
 
-Tuple Tuple::Point(float x, float y, float z) {
+Tuple Tuple::Point(double x, double y, double z) {
     return {x, y, z, 1.0f};
 }
 
-Tuple Tuple::Vector(float x, float y, float z) {
+Tuple Tuple::Vector(double x, double y, double z) {
     return {x, y, z, 0.0f};
 }
 

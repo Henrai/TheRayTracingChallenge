@@ -8,7 +8,7 @@ using namespace std;
 
 
 namespace matrix {
-    Matrix4 Translation(float x, float y, float z) {
+    Matrix4 Translation(double x, double y, double z) {
         Matrix4 ans = Matrix4::Identity();
         ans[0][3] = x;
         ans[1][3] = y;
@@ -16,7 +16,7 @@ namespace matrix {
         return ans;
     }
 
-    Matrix4 Scale(float x, float y, float z) {
+    Matrix4 Scale(double x, double y, double z) {
         Matrix4 ans = Matrix4::Identity();
         ans[0][0] = x;
         ans[1][1] = y;
@@ -24,30 +24,30 @@ namespace matrix {
         return ans;
     }
 
-    Matrix4 RotationX(float rad) {
+    Matrix4 RotationX(double rad) {
         Matrix4 ans = Matrix4::Identity();
-        float sinr = sin(rad);
-        float cosr = cos(rad);
+        double sinr = sin(rad);
+        double cosr = cos(rad);
         ans[1][1] = cosr;
         ans[1][2] = -sinr;
         ans[2][1] = sinr;
         ans[2][2] = cosr;
         return ans;
     }
-    Matrix4 RotationY(float rad) {
+    Matrix4 RotationY(double rad) {
         Matrix4 ans = Matrix4::Identity();
-        float sinr = sin(rad);
-        float cosr = cos(rad);
+        double sinr = sin(rad);
+        double cosr = cos(rad);
         ans[0][0] = cosr;
         ans[2][0] = -sinr;
         ans[0][2] = sinr;
         ans[2][2] = cosr;
         return ans;
     }
-    Matrix4 RotationZ(float rad) {
+    Matrix4 RotationZ(double rad) {
         Matrix4 ans = Matrix4::Identity();
-        float sinr = sin(rad);
-        float cosr = cos(rad);
+        double sinr = sin(rad);
+        double cosr = cos(rad);
         ans[0][0] = cosr;
         ans[0][1] = -sinr;
         ans[1][0] = sinr;
@@ -55,7 +55,7 @@ namespace matrix {
         return ans;
     }
 
-    Matrix4 Shear(float xy, float xz, float yx, float yz, float zx, float zy) {
+    Matrix4 Shear(double xy, double xz, double yx, double yz, double zx, double zy) {
         Matrix4 ans = Matrix4::Identity();
         ans[0][1] = xy;
         ans[0][2] = xz;

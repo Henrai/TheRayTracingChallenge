@@ -36,15 +36,15 @@ namespace lighting {
         Tuple lightV = (light.position - point).normalize();
          ambient = effectiveColor * material.ambient;
 
-        float lightDotNormal = lightV.Dot(normalV);
+        double lightDotNormal = lightV.Dot(normalV);
 
         if (lightDotNormal < 0.0 || isShadowed) {
             diffuse  = Color(0,0,0);
             specular = Color(0,0,0);
         } else {
-            diffuse = effectiveColor * material.diffuse * std::clamp( lightDotNormal, 0.0f, 1.0f);
+            diffuse = effectiveColor * material.diffuse * std::clamp( (float)lightDotNormal, 0.0f, 1.0f);
             Tuple reflectV = -lightV.Reflect(normalV); 
-            float reflectDotEye = std::clamp(reflectV.Dot(eyeV) , 0.0f, 1.0f);
+            double reflectDotEye = std::clamp((float)reflectV.Dot(eyeV) , 0.0f, 1.0f);
             specular = light.intensity * material.specular * pow(reflectDotEye, material.shininess) ; 
         }
         return ambient + diffuse + specular;

@@ -11,13 +11,13 @@ using namespace math;
 class Color : public VectorTrait<Color>
 {
 private:
-    std::array<float, 4> m_data{};
+    std::array<double, 4> m_data{};
 public:
     Color() = default;
-    Color(float r, float g, float b): m_data{r,g,b, 0.f} {}
+    Color(double r, double g, double b): m_data{r,g,b, 0.f} {}
     
     // for the VectorTrait
-    Color (float r, float g, float b ,float a) : m_data{r,g,b,a}{};
+    Color (double r, double g, double b ,double a) : m_data{r,g,b,a}{};
 
      bool operator==(const Color& t) const {
         return equal(R(), t.R())
@@ -26,11 +26,11 @@ public:
     }
 
     Color(const Color& color) : m_data{color.m_data} {}
-    const std::array<float, 4>& getData() const {return m_data;} 
+    const std::array<double, 4>& getData() const {return m_data;} 
     
-    float R() const;
-    float G() const; 
-    float B() const;
+    double R() const;
+    double G() const; 
+    double B() const;
 
     friend std::ostream& operator<<(std::ostream& os, const Color& t);
 

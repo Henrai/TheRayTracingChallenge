@@ -18,8 +18,8 @@
 #include <memory>
 #include <fstream>
 
-#define H_SIZE 512
-#define V_SIZE 512
+#define H_SIZE 300
+#define V_SIZE 300
 
 int main() {
     std::shared_ptr<PointLight> light = std::make_shared<PointLight>(
@@ -28,25 +28,33 @@ int main() {
     
     // set up floor
     std::shared_ptr<Shape> floor = std::make_shared<Plane>();
-    floor->SetTransform(matrix::Translation(0, -10, 0));
+    floor->SetTransform(matrix::Translation(0, 0, 10) * matrix::RotationX(1.5708));
+    floor->getMaterial().ambient = 0.8;
+    floor->getMaterial().diffuse = 0.2;
     floor->getMaterial().specular = 0;
-    floor->getMaterial().pattern = std::make_shared<CheckerPattern>(Color::BLACK, Color::WHITE);
+    floor->getMaterial().pattern = std::make_shared<CheckerPattern>(Color(.15,.15,.15), Color(.85,.85,.85));
 
     
     auto biggger = std::make_shared<Sphere>();
-    biggger->getMaterial().diffuse = 0.1;
-    biggger->getMaterial().reflective = 1;
+    biggger->getMaterial().ambient = 0.0;
+    biggger->getMaterial().diffuse = 0.0;
+    biggger->getMaterial().specular = 0.9;
+    biggger->getMaterial().reflective = 0.9;
     biggger->getMaterial().shininess = 300;
-    biggger->getMaterial().refraction_index = 1.52;
-    biggger->getMaterial().color = Color(0,0,0.1);
+    biggger->getMaterial().transparency = 0.9;
+    biggger->getMaterial().refraction_index = 1.5;
+    biggger->getMaterial().color = Color(1,1,1);
 
     auto smaller= std::make_shared<Sphere>();
     smaller->SetTransform(matrix::Scale(0.5, 0.5, 0.5));
-    smaller->getMaterial().diffuse = 0.1;
-    smaller->getMaterial().reflective = 1;
+    smaller->getMaterial().ambient = 0.0;
+    smaller->getMaterial().diffuse = 0.0;
+    smaller->getMaterial().specular = 0.9;
+    smaller->getMaterial().reflective = 0.9;
+    smaller->getMaterial().transparency = 0.9;
     smaller->getMaterial().shininess = 300;
-    smaller->getMaterial().refraction_index = 1;
-    smaller->getMaterial().color = Color(0,0,0.1);
+    smaller->getMaterial().refraction_index = 1.0000034;
+    smaller->getMaterial().color = Color(1,1,1);
     
 
     std::unique_ptr<World> world = std::make_unique<World>();
@@ -54,16 +62,14 @@ int main() {
     world->AddLight(light);
 
     world->AddShape(floor);
-    //world->AddShape(leftWall);
-    //world->AddShape(rightWall);
     world->AddShape(biggger);
     world->AddShape(smaller);
 
-    Camera camera(H_SIZE, V_SIZE, M_PI/3.f);
+    Camera camera(300, 300, 0.45);
     camera.UpdateTransform(
-        Tuple::Point(0.f, 2.5f, 0), // from
-        Tuple::Point(0.f, 1.f, 0.f),   // To
-        Tuple::Vector(1.f, 0.f, 0.f)   // up
+        Tuple::Point(0.f, 0.f, -5),    // from
+        Tuple::Point(0.f, 0.f, 0.f),   // To
+        Tuple::Vector(0.f, 1.f, 0.f)   // up
     );
 
     Renderer renderer;

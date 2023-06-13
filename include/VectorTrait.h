@@ -33,7 +33,7 @@ public:
             impl().getData()[3] - t.getData()[3]);        
     }
 
-    T operator*(float scalar) const {
+    T operator*(double scalar) const {
         return T(
             impl().getData()[0] * scalar, 
             impl().getData()[1] * scalar, 
@@ -49,7 +49,7 @@ public:
             impl().getData()[3] * t.getData()[3]);
     }
 
-    T operator/(float scalar) const {
+    T operator/(double scalar) const {
          return T(
             impl().getData()[0] / scalar, 
             impl().getData()[1] / scalar, 
@@ -67,7 +67,7 @@ public:
     }
 
 
-    float Dot(const T& t) const {
+    double Dot(const T& t) const {
         return
             impl().getData()[0] * t.getData()[0]
           + impl().getData()[1] * t.getData()[1]
@@ -83,7 +83,7 @@ public:
         );
     }
 
-    float Magnitude() const {
+    double Magnitude() const {
         return std::sqrtf(this->Dot(impl()));
     }
     T normalize() const {

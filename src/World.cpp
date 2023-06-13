@@ -28,14 +28,14 @@ Color World::ShadeHit(const HitResult &hit, int remaining) const
              IsShadowed(hit.overPoint, i));
     }
     
-    return result + reflectedColor(hit, remaining) + refracted_color(hit, remaining);
+    return result + reflectedColor(hit, remaining) +  refracted_color(hit, remaining);
 }
 
 Color World::ColorAt(const Ray &ray, int remaining) const
 {
     std::vector<Intersection> xs;
     this->Intersect(ray, xs);
-    HitResult hit = Intersection::getHitResult(Intersection::Hit(xs), ray);
+    HitResult hit = Intersection::getHitResult(Intersection::Hit(xs), ray, xs);
     return this->ShadeHit(hit, remaining);
 }
 
@@ -43,7 +43,7 @@ bool World::IsShadowed(const Tuple &point, std::shared_ptr<const PointLight> lig
 {
     Tuple l = light->position - point;
 
-    float distance = l.Magnitude();
+    double distance = l.Magnitude();
     Tuple dir = l.normalize();
     
     Ray r(point, dir);
@@ -67,16 +67,31 @@ Color World::reflectedColor(HitResult hitResult, int remaining) const {
 }
 
 Color World::refracted_color(HitResult hitResult, int remaining) const {
-    float n_ratio = hitResult.n1 / hitResult.n2;
-    float cos_i = hitResult.eyev.Dot(hitResult.normalv);
-    float sin2_t = n_ratio * n_ratio * (1 - cos_i*cos_i);
+    
+
+    double n_ratio = hitResult.n1 / hitResult.n2;
+    double cos_i = hitResult.eyev.Dot(hitResult.normalv);
+    double sin2_t = n_ratio * n_ratio * (1 - cos_i*cos_i);
     if (remaining == 0 || sin2_t > 1.0 || hitResult.shape->getMaterial().transparency == 0) {
         return Color(0, 0, 0);
     } else {
-        float cos_t = sqrt(1 - sin2_t);
+        
+
+        double cos_t = sqrt(1 - sin2_t);
         auto dir = hitResult.normalv * (n_ratio * cos_i - cos_t) - hitResult.eyev * n_ratio;
         auto refract_ray = Ray(hitResult.underPoint, dir);
-        return ColorAt(refract_ray, remaining - 1) * hitResult.shape->getMaterial().transparency;
-
+        Color refract_color = ColorAt(refract_ray, remaining - 1) * hitResult.shape->getMaterial().transparency;
+       //if (remaining == 5) { 
+        // cout << "== remaining " << remaining << " ==\n";
+        // hitResult.toString();
+        // cout << "n_ratio: " << n_ratio << endl;
+        // cout << "cos_i: " << cos_i << endl;
+        // cout << "sin2_t: " << sin2_t << endl;
+        // cout << "cos_t: " << cos_t << endl;
+        // cout << "refract dir: " << dir << endl;
+        // cout << "refract color: " << refract_color << endl;
+        // cout << endl << endl;
+       //}
+        return refract_color;
     }
 }

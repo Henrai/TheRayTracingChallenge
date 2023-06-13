@@ -14,7 +14,7 @@ using namespace math;
 template<uint8_t DIM>
 class Matrix {
 private:
-float m_data[DIM][DIM];
+double m_data[DIM][DIM];
 
 
 public:
@@ -32,13 +32,13 @@ Matrix(const Matrix& m) {
         }
     }
 }
-Matrix(std::initializer_list<std::initializer_list<float> > data);
+Matrix(std::initializer_list<std::initializer_list<double> > data);
 
-float* operator[](size_t row) {
+double* operator[](size_t row) {
     return m_data[row];
 }
-float*  operator[](size_t row) const {
-    return const_cast<float*>(m_data[row]);
+double*  operator[](size_t row) const {
+    return const_cast<double*>(m_data[row]);
 }
 bool operator==(const Matrix<DIM>& matrix) const;
 bool operator!=(const Matrix<DIM>& matrix) const {
@@ -57,7 +57,7 @@ Matrix operator=(const Matrix& matrix) {
 bool IsInvertible() const {
     return !equal(this->Determinant(),0.0f);
 }
-float Determinant() const;
+double Determinant() const;
 
 
 
@@ -72,7 +72,7 @@ typename std::enable_if<D == 4, Tuple>::type
 operator*(Tuple const& v) const {
    Tuple t;
    for (size_t i = 0; i < 4; i++) {
-       float temp = 0;
+       double temp = 0;
        for (size_t j = 0; j < 4; j++) {
            temp += m_data[i][j] * v[j];
        }
@@ -82,14 +82,14 @@ operator*(Tuple const& v) const {
 }
 
 template<uint8_t D = DIM>
-typename std::enable_if<(D > 2) ,float>::type
+typename std::enable_if<(D > 2) ,double>::type
 Cofactor(uint8_t row, uint8_t col) const {
-    float sign = !((row+col) & 1) ? 1 : -1;
+    double sign = !((row+col) & 1) ? 1 : -1;
     return sign * this->Minor(row,col);
 }
 
 template<uint8_t D = DIM>
-typename std::enable_if<(D > 2) ,float>::type
+typename std::enable_if<(D > 2) ,double>::type
 Minor(uint8_t row, uint8_t col) const {
     return this->Submatrix(row,col).Determinant();
 }
@@ -102,7 +102,7 @@ using Matrix2 = Matrix<2>;
 
 
 template<uint8_t DIM>
-Matrix<DIM>::Matrix(std::initializer_list<std::initializer_list<float> > data) {
+Matrix<DIM>::Matrix(std::initializer_list<std::initializer_list<double> > data) {
     assert(data.size() == DIM);
     assert(data.begin()->size() == DIM);
     uint8_t row = 0;
@@ -148,7 +148,7 @@ std::ostream& operator<<(std::ostream& os, const Matrix<DIM> & m) {
 }
 
 template<>
-inline float Matrix2::Determinant () const{
+inline double Matrix2::Determinant () const{
     return m_data[0][0] * m_data[1][1] - m_data[0][1] * m_data[1][0];
 }
 
@@ -170,8 +170,8 @@ inline Matrix4 Matrix4::operator*(Matrix4 const& other) const {
 }
 
 template<uint8_t DIM>
-inline float Matrix<DIM>::Determinant () const {
-    float det = 0.f;
+inline double Matrix<DIM>::Determinant () const {
+    double det = 0.f;
     for (int j = 0; j < DIM; j++)
     {
         det +=  m_data[0][j] * Cofactor(0, j);
@@ -211,7 +211,7 @@ Matrix<DIM - 1> Matrix<DIM>::Submatrix(uint8_t row, uint8_t col) const  {
 template<uint8_t DIM>
 Matrix<DIM> Matrix<DIM>::Inverse() const {
     Matrix<DIM> mat;
-    float det = this->Determinant();
+    double det = this->Determinant();
     if (det == 0) {
         return Matrix<DIM>::Identity();
     }

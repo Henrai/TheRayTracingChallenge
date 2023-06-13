@@ -7,6 +7,6 @@
 
 Color GradientPattern::PatternAt(Tuple point) const {
     Color distance = second - first;
-    float fraction = point[0] - floor(point[0]);
+    double fraction = point[0] - floor(point[0]);
     return  first + distance * fraction;
 }

@@ -14,19 +14,19 @@ int main() {
     Canvas canvas(canva_size, canva_size);
     Tuple rayOrigin = Tuple::Point(0.f, 0.f, -5.f);
 
-    float wall_z = 10.f;
-    float wall_size = 7.f;
-    float pixel_size = wall_size / (float) canva_size;
-    float half = wall_size / 2.f;
+    double wall_z = 10.f;
+    double wall_size = 7.f;
+    double pixel_size = wall_size / (double) canva_size;
+    double half = wall_size / 2.f;
 
     Color c = Color::RED;
 
     auto sphere = std::make_shared<Sphere>();
 
     for (size_t i = 0; i < canva_size; i++) {
-        float world_y = half - pixel_size * (float)i;
+        double world_y = half - pixel_size * (double)i;
         for ( size_t j = 0; j < canva_size; j++) {
-            float world_x = -half + pixel_size * (float)j;
+            double world_x = -half + pixel_size * (double)j;
 
             Tuple pos = Tuple::Point(world_x, world_y, wall_z);
             auto r = Ray(rayOrigin, (pos - rayOrigin).normalize());

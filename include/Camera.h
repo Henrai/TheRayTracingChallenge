@@ -9,13 +9,13 @@ class Camera
 private:
     int m_hsize;
     int m_vsize;
-    float m_fov;
-    float m_halfWidth;
-    float m_halfHeight;
-    float m_pixelSize;
+    double m_fov;
+    double m_halfWidth;
+    double m_halfHeight;
+    double m_pixelSize;
     Matrix4 m_transform;
 public:
-    Camera(int h, int v, float fieldOfView);
+    Camera(int h, int v, double fieldOfView);
 
     int getHorizontalSize() const {
         return m_hsize;
@@ -25,11 +25,11 @@ public:
         return m_vsize;
     }
 
-    float getFov() const {
+    double getFov() const {
         return m_fov;
     }
 
-    float getPixelSize() const {
+    double getPixelSize() const {
         return m_pixelSize;
     }
 
@@ -38,6 +38,6 @@ public:
     }
 
     void UpdateTransform(Tuple from, Tuple to, Tuple up);
-    Ray RayFromPixel(float px, float py) const;
+    Ray RayFromPixel(double px, double py) const;
 
 };

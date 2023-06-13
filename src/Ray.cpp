@@ -3,7 +3,7 @@
 #include <Matrix.h>
 #include <Intersection.h>
 
-Tuple Ray::Position(float t) const {
+Tuple Ray::Position(double t) const {
     return m_origin + m_direction * t;
 }
 

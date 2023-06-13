@@ -12,7 +12,7 @@ private:
     Tuple m_direction;
 public:
     Ray(const Tuple& origin, const Tuple& direction) : m_origin(origin), m_direction(direction) {}
-    Tuple Position(float t) const;
+    Tuple Position(double t) const;
     Tuple Origin() const { return m_origin; }
     Tuple Direction() const { return m_direction; }
 

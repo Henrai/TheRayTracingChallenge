@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
     Canvas canvas(500, 500);
-    float rotationAngle = M_PI/8;
+    double rotationAngle = M_PI/8;
     Matrix4 translate = matrix::Translation(250.f, 250.f, 0.f);
     Matrix4 scale = matrix::Scale(200.f, 200.f, 1.f);
     Matrix4 transM = translate * scale ;
