@@ -35,13 +35,9 @@ Ray Camera::RayFromPixel(double px, double py) const {
      double world_x = m_halfWidth - x_offset;
      double world_y = m_halfHeight - y_offset;
 
-     cout << m_transform << endl;
 
      Matrix4 inv_trans = m_transform.Inverse();
 
-     cout << inv_trans << endl;
-
-     cout << world_x << "  " << world_y << endl;
 
      Tuple pixel = inv_trans  * Tuple::Point(world_x, world_y, -1);
      Tuple origin = inv_trans * Tuple::Point(0.f ,0.f ,0.f);

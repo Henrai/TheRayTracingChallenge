@@ -31,3 +31,7 @@
 - Patterns
 
 ![Pattern](./images/patterns.png)
+
+- reflect and refraction
+
+![refract](./images/refraction.png)

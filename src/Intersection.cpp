@@ -15,6 +15,20 @@ void HitResult::toString() const {
     cout << "under point: " << underPoint << endl;
 }
 
+double HitResult::schlick() const {
+    double cos_i = eyev.Dot(normalv);
+    if (n1 > n2) {
+        double n = n1/n2;
+        double sin2_t = n * n *(1 - cos_i * cos_i);
+        if (sin2_t > 1.0) return 1.0;
+
+        double cos_t = sqrt(1.0 - sin2_t);
+        cos_i = cos_t;
+    } 
+    double r0 = (n1-n2)/((n1+n2)*(n1+n2));
+    return r0  + (1-r0) * pow((1-cos_i),5);
+}
+
 bool Intersection::operator==(const Intersection& other) const {
     return   m_hitTime == other.m_hitTime && m_shape == other.m_shape;
 }

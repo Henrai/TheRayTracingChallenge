@@ -28,6 +28,14 @@ Color World::ShadeHit(const HitResult &hit, int remaining) const
              IsShadowed(hit.overPoint, i));
     }
     
+    Color reflectC = reflectedColor(hit, remaining);
+    Color refractC = refracted_color(hit, remaining);
+
+    if (hit.shape->getMaterial().reflective > 0 && hit.shape->getMaterial().transparency > 0) {
+        double reflectance = hit.schlick();
+        return result + reflectC * reflectance + refractC * (1 - reflectance);
+    }
+
     return result + reflectedColor(hit, remaining) +  refracted_color(hit, remaining);
 }
 

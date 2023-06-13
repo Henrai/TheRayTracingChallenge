@@ -24,6 +24,7 @@ struct HitResult {
     Tuple overPoint;
     Tuple underPoint;
     void toString() const;
+    double schlick() const;
 };
 
 class Intersection

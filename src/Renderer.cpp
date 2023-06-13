@@ -18,12 +18,9 @@ Canvas Renderer::Render(const World& world, const Camera& camera) {
             [&] (tbb::blocked_range<size_t> r) {
                 for(size_t i = r.begin(); i < r.end(); i++) {
                     for (int j = 0; j < camera.getVerticalSize(); j++) {
-                       //if (i == 125 && j == 125) {
                             Ray r = camera.RayFromPixel(i,j);
-                            std::cout << r.Direction() << " " << r.Origin() <<std::endl;
                             Color c = world.ColorAt(r);
                             canvas[i][j] = c;
-                        //}
                     }
                 }
         }, tbb::simple_partitioner{});

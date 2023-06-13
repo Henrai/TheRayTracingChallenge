@@ -18,8 +18,8 @@
 #include <memory>
 #include <fstream>
 
-#define H_SIZE 300
-#define V_SIZE 300
+#define H_SIZE 512
+#define V_SIZE 512
 
 int main() {
     std::shared_ptr<PointLight> light = std::make_shared<PointLight>(
@@ -65,7 +65,7 @@ int main() {
     world->AddShape(biggger);
     world->AddShape(smaller);
 
-    Camera camera(300, 300, 0.45);
+    Camera camera(H_SIZE, V_SIZE, 0.45);
     camera.UpdateTransform(
         Tuple::Point(0.f, 0.f, -5),    // from
         Tuple::Point(0.f, 0.f, 0.f),   // To
