@@ -9,6 +9,24 @@
 #include<iostream>
 using namespace std;
 
+void World::AddCamera(Json::JSONObject obj) {
+
+}
+
+void World::AddLight(Json::JSONObject obj) {
+
+}
+
+void World::AddShape(Json::JSONObject) {
+
+}
+
+bool World::LoadSecne(std::string_view file_name) {
+    Json::JSONObject world = Json::JSONObject::fromFile(file_name);
+    return true;
+
+}
+
 Color World::ShadeHit(const HitResult &hit, int remaining) const
 {
     //cout << "okita shade hit" << endl;

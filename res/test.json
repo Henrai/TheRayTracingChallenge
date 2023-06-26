@@ -1,0 +1,58 @@
+
+{
+    "camera": {
+        "height": 512,
+        "width": 512,
+        "fov": 0.45,
+        "from": [0.0, 0.0, -5.0],
+        "to": [0.0, 0.0, 0.0],
+        "up": [0.0, 1.0, 0.0]
+    },
+    "lights": {
+        "point": [2.0, 10.0, -5.0],
+        "color": [0.9, 0.9, 0.9]
+    },
+    "shapes": {
+        "floor":{
+            "tranfomation": {
+                "rotationX": 1.5708,
+                "translation": [0.0, 0.0,10.0]   
+            },
+            "material": {
+                "shape": "plane",
+                "ambient": 0.8,
+                "diffuse": 0.2,
+                "specular": 0.0,
+                "pattern": {
+                    "name": "CheckerPattern",
+                    "color": [0.15, 0.15, 0.15]
+                }
+            }
+        },
+        "bigger":{
+            "shape": "sphere",
+            "ambient": 0.0,
+            "diffuse": 0.0,
+            "specular": 0.9,
+            "reflectiveness": 0.9,
+            "shiniese": 300,
+            "transparecy": 0.9,
+            "refraction_index": 1.5,
+            "color": [1.0,1.0,1.0]
+        },
+        "smaller":{
+            "shape": "sphere",
+            "transformation": {
+                "scale": [0.5, 0.5, 0.5]
+            },
+            "ambient": 0.0,
+            "diffuse": 0.0,
+            "specular": 0.9,
+            "reflectiveness": 0.9,
+            "shiniese": 300,
+            "transparecy": 0.9,
+            "refraction_index": 1.000034,
+            "color": [1.0,1.0,1.0]
+        }
+    }
+}

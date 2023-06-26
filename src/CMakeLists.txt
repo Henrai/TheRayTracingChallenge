@@ -24,6 +24,7 @@ add_library(${LIBRARY}
     World.cpp
     Camera.cpp
     Renderer.cpp
+    utils/json.cpp
 
     ${HEADER_LIST})
 target_link_libraries(${LIBRARY} PRIVATE TBB::tbb)
