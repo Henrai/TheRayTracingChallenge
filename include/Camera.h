@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Matrix.h>
+#include <iostream>
 
 class Ray;
 
@@ -39,5 +40,11 @@ public:
 
     void UpdateTransform(Tuple from, Tuple to, Tuple up);
     Ray RayFromPixel(double px, double py) const;
+    
+    void print() const {
+        std::cout << "-----------camera----------\n";
+        std::cout<< "hsize: " << m_hsize << " vsize: " <<  m_vsize << std::endl;
+        std::cout << "fov: " << m_fov << std::endl;
+    }
 
 };

@@ -11,14 +11,21 @@
 #include <iostream>
 #include <iomanip>
 #include <memory>
+#include <string>
 
 using namespace std;
 
 struct PointLight
 {
+   std::string name;
    Tuple position;
    Color intensity;
-   PointLight(Tuple p, Color i) : position(p), intensity(i) {}
+   PointLight(Tuple p, Color i, const std::string& name = "") : position(p), intensity(i), name(name) {}
+   void print() const {
+        cout << "name: " << name << endl;
+        cout << "position: " << position << endl;
+        cout << "intensity: " << intensity << endl;
+   }
 };
 
 namespace lighting {

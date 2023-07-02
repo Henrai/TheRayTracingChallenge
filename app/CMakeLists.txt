@@ -14,3 +14,7 @@ target_link_libraries(phong_shading PRIVATE RayTracer_lib )
 
 add_executable(scene Scene.cpp)
 target_link_libraries(scene PRIVATE RayTracer_lib )
+
+
+add_executable(loadscene loadscene.cpp)
+target_link_libraries(loadscene PRIVATE RayTracer_lib )

@@ -185,29 +185,54 @@ namespace Json {
         }
     }
 
-    bool JSONObject::asBool() {
+    bool JSONObject::asBool() const {
         return std::get<bool>(inner);
     }
 
-    int JSONObject::asInt(){
+    int JSONObject::asInt() const {
         return std::get<int>(inner);
     }
 
-    double JSONObject::asDouble() {
+    double JSONObject::asDouble() const {
         return std::get<double>(inner);
     }
 
-    std::string JSONObject::asString() {
+    std::string JSONObject::asString() const{
         return std::get<std::string>(inner);
     }
 
-    JSONMap JSONObject::asMap() {
+    JSONMap JSONObject::asMap() const {
         return std::get<JSONMap>(inner);
     }
 
-    JSONList JSONObject::asList() {
+    JSONList JSONObject::asList() const {
         return std::get<JSONList>(inner);
     }
+
+
+    bool JSONObject::isBool() const {
+        return std::holds_alternative<bool>(inner);
+    }
+
+    bool JSONObject::isInt() const {
+        return std::holds_alternative<int>(inner);
+    }
+
+    bool JSONObject::isDouble() const {
+        return std::holds_alternative<double>(inner);
+    }
+    bool JSONObject::isString() const {
+        return std::holds_alternative<std::string>(inner);
+    }
+
+    bool JSONObject::isMap() const {
+        return std::holds_alternative<JSONMap>(inner);
+    }
+    bool JSONObject::isList() const {
+        return std::holds_alternative<JSONList>(inner);
+    }
+
+
 
     JSONObject& JSONObject::operator[](const std::string& key) {
          if (std::holds_alternative<JSONMap>(inner)) {
@@ -220,8 +245,16 @@ namespace Json {
         throw std::runtime_error("JSONObject does not hold a JSONMap!");
     }
 
+    JSONObject JSONObject::operator[](const std::string& key) const {
+        return const_cast<JSONObject*>(this)->operator[](key);
+    }
+
     JSONObject& JSONObject::operator[](size_t index) {
         return std::get<JSONList>(inner)[index];
+    }
+
+    JSONObject JSONObject::operator[](size_t index) const{
+        return  const_cast<JSONObject*>(this)->operator[](index);
     }
 
     bool JSONObject::operator==(std::monostate) {
@@ -235,26 +268,23 @@ namespace Json {
    JSONObject JSONObject::fromFile(std::string_view filename) {
         std::ifstream file(filename);
         if(file.is_open()) {
-            std::cout << "file is open" << std::endl;
             std::string str = "";
             
             std::string line;
             while (std::getline(file, line)) {
                 str += line;
-                printf("%s", line.c_str());
             }
             file.close();
 
             auto [obj, eaten] = parse(str);
-            std::cout << eaten << " " << str.size() << std::endl;
-            std::cout << obj << std::endl;
-            std::cout << str << std::endl;
+     
             if (eaten == str.size()) {
                 return obj;
             } else {
                 return JSONObject{std::monostate()};
             }
         }
+       
         return JSONObject{std::monostate()};
     }
 }

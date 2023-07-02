@@ -2,8 +2,19 @@
 
 #include "Color.h"
 #include "Patterns/Pattern.h"
-
+#include "utils/json.h"
 #include <memory>
+
+#include <iostream>
+
+#define SET_VALUE(name) \
+   if(obj[#name].isDouble()) { \
+      name = obj[#name].asDouble(); \
+   }
+#define PRINT_VALUE(name) \
+   std::cout << #name << ": " << name << std::endl
+
+
 
 class Material
 {
@@ -18,5 +29,19 @@ public:
     double refraction_index {1.f};
 
     std::shared_ptr<Pattern> pattern;
+
+    Material() = default;
+    Material(const Json::JSONObject& obj);
+
+    void print() const {
+       PRINT_VALUE(ambient);
+       PRINT_VALUE(diffuse);
+       PRINT_VALUE(specular);
+       PRINT_VALUE(shininess);
+       PRINT_VALUE(reflective);
+       PRINT_VALUE(transparency);
+       PRINT_VALUE(refraction_index);
+       PRINT_VALUE(color);
+    }
 
 };

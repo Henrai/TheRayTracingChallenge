@@ -15,6 +15,7 @@ private:
     Tuple DoNormalAt(const Tuple& point) const override;
     
 public:
+    Plane(const std::string& name = "") : Shape(name){}
     ~Plane() {}
     
 };

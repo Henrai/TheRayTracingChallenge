@@ -72,6 +72,12 @@ int main() {
         Tuple::Vector(0.f, 1.f, 0.f)   // up
     );
 
+    camera.print();
+    light->print();
+    smaller->print();
+    biggger->print();
+    floor->print();
+    
     Renderer renderer;
 
     Canvas canvas = renderer.Render(*world.get(), camera);

@@ -25,6 +25,8 @@ Camera::Camera(int h, int v, double fieldOfView):
 }
 
 void Camera::UpdateTransform(Tuple from, Tuple to, Tuple up) {
+    cout << "camera Trans" << endl;
+    cout << from  << " " << to << " " << up << endl;
     m_transform = matrix::ViewTransformation(from, to, up);
 }
 

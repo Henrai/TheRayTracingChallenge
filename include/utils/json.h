@@ -1,6 +1,7 @@
+#pragma once 
+
 #include <cstddef>
 #include <type_traits>
-#ifndef __JSON_H__
 
 #include <charconv>
 #include <optional>
@@ -33,16 +34,24 @@ struct JSONObject {
     static bool canEatToken(std::string_view json, std::string_view token);
     static char unescape_char(char ch);
 
-    bool asBool();
-    int asInt();
-    double asDouble();
-    std::string asString();
-    JSONMap asMap();
-    JSONList asList();
+    bool asBool() const;
+    int asInt() const;
+    double asDouble() const;
+    std::string asString() const;
+    JSONMap asMap() const;
+    JSONList asList() const;
+
+    bool isBool() const;
+    bool isInt() const;
+    bool isDouble() const ;
+    bool isString() const ;
+    bool isMap() const;
+    bool isList() const;
 
     JSONObject& operator[](const std::string& key);
     JSONObject& operator[](size_t index);
-
+    JSONObject operator[](const std::string& key) const; 
+    JSONObject operator[](size_t index) const;
     bool operator==(std::monostate);
     bool operator!=(std::monostate);
 
@@ -75,7 +84,3 @@ overloaded(Fs...) -> overloaded<Fs...>;
 std::ostream& operator<<(std::ostream& os, const JSONObject& obj);
 
 } // namespace Json
-
-
-
-#endif

@@ -15,6 +15,7 @@ private:
     Tuple DoNormalAt(const Tuple& point) const override;
     
 public:
+    Sphere(const std::string& name = "") : Shape(name) {}
     ~Sphere() {}
     
 };

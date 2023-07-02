@@ -14,7 +14,7 @@ class World
 private:
     std::vector<std::shared_ptr<const Shape> >  m_objects;
     std::vector<std::shared_ptr<const PointLight> > m_lights;
-    std::shared_ptr<const Camera> mCamera;
+    std::shared_ptr<Camera> mCamera;
 
 public:
     void AddCamera(Json::JSONObject obj);
@@ -22,12 +22,14 @@ public:
     void AddShape(std::shared_ptr<const Shape> shape) {
         m_objects.push_back(shape);
     }
-    void AddShape(Json::JSONObject obj);
+    void AddShape(const std::string& name, Json::JSONObject obj);
+    void AddShapes(Json::JSONObject map);
 
     void AddLight(std::shared_ptr<const PointLight> light) {
         m_lights.push_back(light);
     }
-    void AddLight(Json::JSONObject obj);
+    void AddLight(const std::string& name, Json::JSONObject obj);
+    void AddLights(Json::JSONObject maps);
 
     const std::vector<std::shared_ptr<const Shape> >& getObjects() const{
         return m_objects;
@@ -59,5 +61,7 @@ public:
     bool IsShadowed(const Tuple& point, std::shared_ptr<const PointLight> light) const;
 
     bool LoadSecne(std::string_view file_name);
+
+    void render();
 
 };

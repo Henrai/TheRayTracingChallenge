@@ -9,12 +9,15 @@
         "up": [0.0, 1.0, 0.0]
     },
     "lights": {
-        "point": [2.0, 10.0, -5.0],
-        "color": [0.9, 0.9, 0.9]
+        "light1": {
+            "point": [2.0, 10.0, -5.0],
+            "color": [0.9, 0.9, 0.9]
+        }
     },
     "shapes": {
         "floor":{
-            "tranfomation": {
+            "shape": "plane", 
+            "transformation": {
                 "rotationX": 1.5708,
                 "translation": [0.0, 0.0,10.0]   
             },
@@ -25,34 +28,39 @@
                 "specular": 0.0,
                 "pattern": {
                     "name": "CheckerPattern",
-                    "color": [0.15, 0.15, 0.15]
+                    "color_1": [0.15, 0.15, 0.15],
+                    "color_2": [0.85, 0.85, 0.85]
                 }
             }
         },
         "bigger":{
             "shape": "sphere",
-            "ambient": 0.0,
-            "diffuse": 0.0,
-            "specular": 0.9,
-            "reflectiveness": 0.9,
-            "shiniese": 300,
-            "transparecy": 0.9,
-            "refraction_index": 1.5,
-            "color": [1.0,1.0,1.0]
+            "material": {
+                "ambient": 0.0,
+                "diffuse": 0.0,
+                "specular": 0.9,
+                "reflective": 0.9,
+                "shininess": 300.0,
+                "transparency": 0.9,
+                "refraction_index": 1.5,
+                "color": [1.0,1.0,1.0]
+            }
         },
         "smaller":{
             "shape": "sphere",
             "transformation": {
                 "scale": [0.5, 0.5, 0.5]
             },
-            "ambient": 0.0,
-            "diffuse": 0.0,
-            "specular": 0.9,
-            "reflectiveness": 0.9,
-            "shiniese": 300,
-            "transparecy": 0.9,
-            "refraction_index": 1.000034,
-            "color": [1.0,1.0,1.0]
+            "material": {
+                "ambient": 0.0,
+                "diffuse": 0.0,
+                "specular": 0.9,
+                "reflective": 0.9,
+                "shininess": 300.0,
+                "transparency": 0.9,
+                "refraction_index": 1.000034,
+                "color": [1.0,1.0,1.0]
+            }
         }
     }
 }
