@@ -35,3 +35,6 @@
 - reflect and refraction
 
 ![refract](./images/refraction.png)
+
+- test json scene [refract.json](./res/refract.json)
+![jsonScene](./images/refract.png)

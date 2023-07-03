@@ -1,0 +1,111 @@
+{
+    "camera": {
+        "height": 512,
+        "width": 512,
+        "fov": 1.0472,
+        "from": [0.0, 1.5, -5.0],
+        "to": [0.0, 1.0, 0.0],
+        "up": [0.0, 1.0, 0.0]
+    },
+    "lights": {
+        "light1": {
+            "point": [-10.0, 10.0, -10.0],
+            "color": [0.9, 0.9, 0.9]
+        }
+    },
+    "shapes": {
+        "floor": {
+            "shape": "plane", 
+            "transformation":{ 
+                "rotationY": 0.78539816
+            },
+            "material": {
+                "shape": "plane",
+                "specular": 0.0,
+                "color": [0.9, 0.9, 0.9],
+                "pattern": {
+                    "name": "CheckerPattern",
+                    "color_1": [0.15, 0.15, 0.15],
+                    "color_2": [0.85, 0.85, 0.85]
+                }
+            }
+        },
+        "left_wall": {
+            "shape": "plane",
+            "transformation":{
+                "rotationX": 1.57079632679,
+                "rotationY": -0.78539816,
+                "translation": [0.0, 0.0, 5.0]
+            },
+            "material":{
+                "pattern": {
+                    "name": "CheckerPattern",
+                    "color_1": [0.15, 0.15, 0.15],
+                    "color_2": [0.85, 0.85, 0.85]
+                }
+            }
+        },
+        "right_wall": {
+            "shape": "plane",
+            "transformation":{
+                "rotationX": 1.57079632679,
+                "rotationY": 0.78539816,
+                "translation": [0.0, 1.0, 5.0]
+            },
+            "material":{
+                "pattern": {
+                    "name": "CheckerPattern",
+                    "color_1": [0.15, 0.15, 0.15],
+                    "color_2": [0.85, 0.85, 0.85]
+                }
+            }
+        },
+        "left_ball":{
+            "shape": "sphere",
+            "transformation": {
+                "translation": [-1.0, 0.5, 1.0],
+                "scale": [0.5, 0.5, 0.5]
+            },
+            "material": {
+                "ambient": 0.0,
+                "diffuse": 0.7,
+                "specular": 0.3,
+                "color": [0.1, 1.0, 0.5]
+            }
+        },
+        "middle_ball":{
+            "shape": "sphere",
+            "transformation": {
+                "translation": [0.0, 1.0, -2.0],
+                "scale":[0.5,0.5,0.5]
+            },
+            "material": {
+                "ambient": 0.0,
+                "diffuse": 0.0,
+                "specular": 0.9,
+                "reflective": 0.9,
+                "shininess": 300.0,
+                "transparency": 0.9,
+                "refraction_index": 1.45,
+                "color": [1.0,1.0,1.0]
+            }
+        },
+        "right_ball":{
+            "shape": "sphere",
+            "transformation": {
+                "translation": [0.5, 0.33, 1.5],
+                "scale": [0.33, 0.33, 0.33]
+            },
+            "material": {
+                "diffuse": 0.7,
+                "specular": 0.3,
+                "color": [1.0,1.0,1.0],
+                "pattern": {
+                    "name": "StripePattern",
+                    "color_1": [1.0, 0.8, 0.1],
+                    "color_2": [0.9, 0.9, 0.9]
+                }
+            }
+        }
+    }
+}

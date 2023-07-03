@@ -1,6 +1,9 @@
 #include "Material.h"
 #include "Color.h"
 #include "Patterns/CheckerPattern.h"
+#include "Patterns/GradientPattern.h"
+#include "Patterns/RingPattern.h"
+#include "Patterns/StripePattern.h"
 #include <memory>
 #include <utils/json.h>
 
@@ -35,6 +38,25 @@ Material::Material(const Json::JSONObject& obj) {
             pattern = std::make_shared<CheckerPattern>(
                 Color(colorlist1[0].asDouble(), colorlist1[1].asDouble(), colorlist1[2].asDouble()),
                 Color(colorlist2[0].asDouble(), colorlist2[1].asDouble(), colorlist2[2].asDouble()));
+        } else if (name == "StripePattern") {
+           auto colorlist1 = patternMap["color_1"].asList();
+            auto colorlist2 = patternMap["color_2"].asList();
+            pattern = std::make_shared<StripePattern>(
+                Color(colorlist1[0].asDouble(), colorlist1[1].asDouble(), colorlist1[2].asDouble()),
+                Color(colorlist2[0].asDouble(), colorlist2[1].asDouble(), colorlist2[2].asDouble())); 
+        } else if (name == "RingPattern") {
+            auto colorlist1 = patternMap["color_1"].asList();
+            auto colorlist2 = patternMap["color_2"].asList();
+            pattern = std::make_shared<RingPattern>(
+                Color(colorlist1[0].asDouble(), colorlist1[1].asDouble(), colorlist1[2].asDouble()),
+                Color(colorlist2[0].asDouble(), colorlist2[1].asDouble(), colorlist2[2].asDouble())); 
+
+        } else if (name == "GradientPattern") {
+            auto colorlist1 = patternMap["color_1"].asList();
+            auto colorlist2 = patternMap["color_2"].asList();
+            pattern = std::make_shared<GradientPattern>(
+                Color(colorlist1[0].asDouble(), colorlist1[1].asDouble(), colorlist1[2].asDouble()),
+                Color(colorlist2[0].asDouble(), colorlist2[1].asDouble(), colorlist2[2].asDouble())); 
         }
     }
     
